@@ -30,13 +30,29 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">LunchUp</a>
+          <a class="navbar-brand" href="/rango/">Rango</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
             <li><a href="{% url 'index' %}">Home</a></li>
             <li><a href="{% url 'about' %}">About</a></li>
           </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+                {% block lside_block %}{% endblock %}
+        </div>
+        <div class="col-sm-6 col-sm-offset-3 col-md-8 col-md-offset-2 main">
+           <div>
+                {% block body_block %}{% endblock %}
+           </div>
+        </div>
+              <div class="col-sm-3 col-md-2 sidebar">
+                {% block rside_block %}{% endblock %}
         </div>
       </div>
     </div>
