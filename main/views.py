@@ -1,24 +1,27 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 
 # Create your views here.
 
 
 def splash(request):
-    return None
+    return HttpResponse('OK')
 
 def index(request):
-    return None
+    return HttpResponse('OK')
 
 def about(request):
-    return None
+    return HttpResponse('OK')
 
 def profile(request):
-    return None
+    return HttpResponse('OK')
 
 # Timetabling
 def availability(request):
-    return None
+    return HttpResponse('OK')
 
+def messages(request):
+    return HttpResponse('OK')
 # Having the ability to browse lunch history could be useful
 def history(request):
-    return None
+    return HttpResponse('OK')
