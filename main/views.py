@@ -5,23 +5,27 @@ from django.shortcuts import render
 
 
 def splash(request):
-    return HttpResponse('OK')
+    return render(request, 'splash.html')
 
 def index(request):
-    return HttpResponse('OK')
+    context_dict = {}
+    return render(request, 'main/index.html', context_dict)
 
 def about(request):
-    return HttpResponse('OK')
+    return render(request, 'main/about.html')
 
 def profile(request):
-    return HttpResponse('OK')
-
+    context_dict = {}
+    return render(request, 'main/profile.html', context_dict)
 # Timetabling
 def availability(request):
-    return HttpResponse('OK')
+    context_dict = {}
+    return render(request, 'main/availability.html', context_dict)
 
 def messages(request):
-    return HttpResponse('OK')
+    context_dict = {}
+    return render(request, 'main/message.html', context_dict)
 # Having the ability to browse lunch history could be useful
 def history(request):
-    return HttpResponse('OK')
+    context_dict = {}
+    return render(request, 'main/history.html', context_dict)
