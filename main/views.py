@@ -15,9 +15,18 @@ def about(request):
     return render(request, 'main/about.html')
 
 def profile(request):
+    u = User.objects.get(username=request.user.username)
     context_dict = {}
+    try:
+	up = UserProfile.objects.get(user=u)
+    except:
+	   up = None
+	
+    context_dict['user'] = u
+    context_dict['userprofile'] = up
     return render(request, 'main/profile.html', context_dict)
-# Timetabling
+
+	# Timetabling
 def availability(request):
     context_dict = {}
     return render(request, 'main/availability.html', context_dict)
