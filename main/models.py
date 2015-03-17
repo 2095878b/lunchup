@@ -39,6 +39,15 @@ class User(models.Model):
     def __unicode__(self):
         return self.firstName + " " + self.lastName
 
+# TODO:
+class UserProfile(models.Model):
+    interests = models.ManyToManyField(Interest)
+    university = models.ForeignKey(University)
+    degree = models.CharField(max_length=64)
+    about = models.CharField(max_length=6000)
+    picture = models.ImageField(upload_to='profile_images', blank=True)
+    birthday = models.DateField()
+
 class Lunch(models.Model):
     # TODO: Consider renaming these two
     userOne = models.ForeignKey(User, related_name='userone')
