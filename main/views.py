@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-
+from main.models import *
 # Create your views here.
 
 
@@ -25,6 +25,23 @@ def profile(request):
     context_dict['user'] = u
     context_dict['userprofile'] = up
     return render(request, 'main/profile.html', context_dict)
+
+def register_profile(request):
+    if request.method == 'POST':
+        profile_form = UserProfileForm(data=request.POST)
+        if profile_form.is_valid():
+            profile = profile_form.save(commit=False)
+            profile.user = User.objects.get(id=request.user.id)
+            if 'picture' in request.FILES:
+                try:
+                    profile.picture = request.FILES['picture']
+                except:
+                    pass
+            profile.save()
+            return redirect('index')
+    else:
+        profile_form = UserProfileForm()
+    return render(request, 'registration/profile_registration.html', {'profile_form': profile_form})
 
 	# Timetabling
 def availability(request):
