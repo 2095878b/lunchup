@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from main.models import *
+from django.forms import extras
 
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
@@ -17,7 +18,7 @@ class UserProfileForm(forms.ModelForm):
     degree = forms.CharField(label='Degree title', max_length=64)
     about = forms.CharField(label='About me', help_text="", widget=forms.Textarea(attrs={'cols': 45, 'rows': 5}, ))
     picture = forms.ImageField(label='Profile picture')
-    birthday = forms.DateField(label='Date of birth', input_formats='%d/%m/%Y', widget=forms.DateInput(format='%d/%m/%Y'))
+    birthday = forms.DateField(label='Date of birth', widget=extras.SelectDateWidget)
     class Meta:
         model = UserProfile
         exclude = ('user', )

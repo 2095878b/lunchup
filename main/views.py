@@ -46,6 +46,28 @@ def add_details(request):
         profile_form = UserProfileForm()
     return render(request, 'registration/profile_registration.html', {'profile_form': profile_form})
 
+def edit_profile(request):
+    try:
+        user_profile = UserProfile.objects.get(user=request.user)
+    except:
+        user_profile = None
+    if request.method == 'POST':
+        profile_form = UserProfileForm(data=request.POST, instance=user_profile)
+        if profile_form.is_valid():
+            profile_updated = profile_form.save(commit=False)
+            if users_profile is None:
+                profile_updated.user = User.objects.get(id=request.user.id)
+            if 'picture' in request.FILES:
+                try:
+                    profile_updated.picture = request.FILES['picture']
+                except:
+                    pass
+            profile_updated.save()
+            return redirect('profile')
+    else:
+        form = UserProfileForm(instance=user_profile)
+        return render(request, 'registration/profile_edit.html', {'profile_form': form})
+
 # Timetabling
 def availability(request):
     context_dict = {}

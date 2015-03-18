@@ -10,4 +10,5 @@ urlpatterns = patterns('',
     #url(r'^profile/(?P<category_name_slug>[\w\-]+)/add_page/$', views.profile, name='profile'),
     url(r'^availability/$', views.availability, name='availability'),
     url(r'^history/$', views.history, name='history'),
+	url(r'^edit_profile/$', views.edit_profile, name='edit_profile'),
 )
