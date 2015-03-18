@@ -10,6 +10,7 @@ class UserForm(forms.ModelForm):
         fields = ('username', 'email', 'password')
 
 class UserProfileForm(forms.ModelForm):
+    your_name = forms.CharField(label='Your name', max_length=100)
     class Meta:
         model = UserProfile
-        fields = ('website', 'picture')
+        fields = ('firstName', 'lastName', 'regularEmail', 'interests', 'university', 'degree', 'about', 'picture', 'birthday')

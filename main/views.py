@@ -1,5 +1,6 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from main.forms import UserProfileForm
 from main.models import *
 
 def splash(request):
@@ -28,7 +29,7 @@ def profile(request):
     return render(request, 'main/profile.html', context_dict)
 
 
-'''def register_profile(request):
+def add_details(request):
     if request.method == 'POST':
         profile_form = UserProfileForm(data=request.POST)
         if profile_form.is_valid():
@@ -44,7 +45,7 @@ def profile(request):
     else:
         profile_form = UserProfileForm()
     return render(request, 'registration/profile_registration.html', {'profile_form': profile_form})
-'''
+
 # Timetabling
 def availability(request):
     context_dict = {}
