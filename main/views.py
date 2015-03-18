@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from main.forms import UserProfileForm
@@ -16,18 +17,17 @@ def about(request):
     return render(request, 'main/about.html')
 
 
-def profile(request):
-    u = User.objects.get(username=request.user.username)
-    context_dict = {}
+def profile(request, user_id = None):
+    if user_id is not None:
+        context_dict = {'user': User.objects.get(id=user_id)}
+    else:
+        context_dict = {'user': User.objects.get(id=request.user.id)}
     try:
-        up = UserProfile.objects.get(user=u)
+        context_dict['profile'] = UserProfile.objects.get(user=context_dict['user'])
     except:
-        up = None
+        context_dict['profile'] = None
 
-    context_dict['user'] = u
-    context_dict['userprofile'] = up
-    return render(request, 'main/profile.html', context_dict)
-
+    return render(request, 'registration/profile.html', context_dict)
 
 def add_details(request):
     if request.method == 'POST':
@@ -46,6 +46,7 @@ def add_details(request):
         profile_form = UserProfileForm()
     return render(request, 'registration/profile_registration.html', {'profile_form': profile_form})
 
+@login_required
 def edit_profile(request):
     try:
         user_profile = UserProfile.objects.get(user=request.user)
@@ -55,7 +56,7 @@ def edit_profile(request):
         profile_form = UserProfileForm(data=request.POST, instance=user_profile)
         if profile_form.is_valid():
             profile_updated = profile_form.save(commit=False)
-            if users_profile is None:
+            if user_profile is None:
                 profile_updated.user = User.objects.get(id=request.user.id)
             if 'picture' in request.FILES:
                 try:
@@ -63,10 +64,9 @@ def edit_profile(request):
                 except:
                     pass
             profile_updated.save()
-            return redirect('profile')
-    else:
-        form = UserProfileForm(instance=user_profile)
-        return render(request, 'registration/profile_edit.html', {'profile_form': form})
+            return redirect('myprofile')
+    form = UserProfileForm(instance=user_profile)
+    return render(request, 'registration/profile_edit.html', {'profile_form': form})
 
 # Timetabling
 def availability(request):

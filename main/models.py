@@ -11,6 +11,8 @@ class University(models.Model):
     name = models.CharField(max_length=64)
     # TODO: Location, excluded for now
 
+    def __unicode__(self):
+        return u'%s' % (self.name)
     class Meta:
         verbose_name_plural = "universities"
 
@@ -23,11 +25,12 @@ class UserProfile(models.Model):
 
     #interests = models.ManyToManyField(Interest)
 
-    university = models.ForeignKey(University)
+    university = models.ForeignKey(University, blank=True, null=True)
     degree = models.CharField(max_length=64)
     about = models.TextField(max_length=6000)
     picture = models.ImageField(upload_to='profile_images', blank=True)
-    birthday = models.DateField()
+
+    birthday = models.DateField(blank=True, null=True)
 
 class Lunch(models.Model):
     # TODO: Consider renaming these two

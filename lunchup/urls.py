@@ -5,7 +5,7 @@ from registration.backends.simple.views import RegistrationView
 
 class MyRegistrationView(RegistrationView):
     def get_success_url(self, request, user):
-        return '/add_details/'
+        return '/edit_profile/'
 
 urlpatterns = patterns('',
     url(r'^', include('main.urls')),

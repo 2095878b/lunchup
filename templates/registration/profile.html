@@ -1,18 +1,23 @@
 {% extends "base.html" %}
 
-{% block body_block %}
-    <div class="hero-unit">
-        <h2>{{ user.username }}</h2>
-        <p>Email: {{ user.email }}</p>
+{% load staticfiles %}
 
-        {% if profile %}
-         <p>Website: <a href = "{{ profile.website }}">{{ profile.website }}</a></p>
-         {% if profile.picture %}
-             <img src = "{{ profile.picture.url }}" />
-         {% endif %}
-        {% endif %}
-        {% if userprofile %}
-            <p><a href = "{% url 'edit_profile' %}">Edit Profile</a></p>
-        {% endif %}
-    </div>
+{% block title %} Profile {% endblock %}
+
+{% block body_block %}
+<div class="page-header">
+	<h1>User Profile</h1>
+</div>
+<div class="hero-unit">
+	
+	<p>Username: {{ user.username }}</p>
+	<p>Email: {{ user.email }}</p>
+    {% if profile %}
+        {% for item in profile %}
+            <p>{{ item }}</p>
+        {% endfor %}
+    {% endif %}
+    <p><a href="{% url 'edit_profile' %}">Edit profile</a></p>
+
+</div>
 {% endblock %}
