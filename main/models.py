@@ -25,7 +25,7 @@ class UserProfile(models.Model):
 
     university = models.ForeignKey(University)
     degree = models.CharField(max_length=64)
-    about = models.CharField(max_length=6000)
+    about = models.TextField(max_length=6000)
     picture = models.ImageField(upload_to='profile_images', blank=True)
     birthday = models.DateField()
 
