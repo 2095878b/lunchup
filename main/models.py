@@ -1,5 +1,5 @@
 from django.db import models
-from django.template.defaultfilters import slugify
+from django.contrib.auth.models import User
 
 # TODO: check foreign key on_delete parameter (low priority, later on)
 
@@ -14,34 +14,15 @@ class University(models.Model):
     class Meta:
         verbose_name_plural = "universities"
 
-class User(models.Model):
+class UserProfile(models.Model):
     # TODO: Check the constraints
+    user = models.OneToOneField(User)
     firstName = models.CharField(max_length=64)
     lastName = models.IntegerField(max_length=64)
-    email = models.EmailField()
-    password = models.CharField(max_length=64)
-    uniEmail = models.EmailField()
+    regularEmail = models.EmailField()
 
     interests = models.ManyToManyField(Interest)
 
-    university = models.ForeignKey(University)
-    degree = models.CharField(max_length=64)
-    about = models.CharField(max_length=6000)
-    picture = models.ImageField(upload_to='profile_images', blank=True)
-    birthday = models.DateField()
-
-    slug = models.SlugField(unique=True)
-
-    def save(self, *args, **kwargs):
-        self.slug = slugify(self.firstName + " " + self.lastName)
-        super(User, self).save(*args, **kwargs)
-
-    def __unicode__(self):
-        return self.firstName + " " + self.lastName
-
-# TODO:
-class UserProfile(models.Model):
-    interests = models.ManyToManyField(Interest)
     university = models.ForeignKey(University)
     degree = models.CharField(max_length=64)
     about = models.CharField(max_length=6000)
