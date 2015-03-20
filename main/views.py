@@ -7,11 +7,12 @@ from main.models import *
 def splash(request):
     return render(request, 'splash.html')
 
+def how_it_works(request):
+    return render(request, 'main/how_it_works.html')
 
-def index(request):
+def notifications(request):
     context_dict = {}
-    return render(request, 'main/index.html', context_dict)
-
+    return render(request, 'main/notifications.html', context_dict)
 
 def about(request):
     return render(request, 'main/about.html')
@@ -69,17 +70,6 @@ def edit_profile(request):
     return render(request, 'registration/profile_edit.html', {'profile_form': form})
 
 # Timetabling
-def availability(request):
+def avail(request):
     context_dict = {}
-    return render(request, 'main/availability.html', context_dict)
-
-
-def messages(request):
-    context_dict = {}
-    return render(request, 'main/message.html', context_dict)
-
-
-# Having the ability to browse lunch history could be useful
-def history(request):
-    context_dict = {}
-    return render(request, 'main/history.html', context_dict)
+    return render(request, 'main/avail.html', context_dict)

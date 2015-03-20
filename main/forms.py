@@ -15,7 +15,6 @@ class UserProfileForm(forms.ModelForm):
     regularEmail = forms.EmailField(label='Public email', required=False)
 
     university = forms.ModelChoiceField(queryset=University.objects.all(), required=False)
-    degree = forms.CharField(label='Degree title', max_length=64, required=False)
     about = forms.CharField(label='About me', help_text="", widget=forms.Textarea(attrs={'cols': 45, 'rows': 5}, ), required=False)
     picture = forms.ImageField(label='Profile picture', required=False)
 
@@ -23,4 +22,4 @@ class UserProfileForm(forms.ModelForm):
 
     class Meta:
         model = UserProfile
-        exclude = ('user', 'birthday',)
+        exclude = ('user', 'university')

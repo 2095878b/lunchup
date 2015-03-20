@@ -5,11 +5,9 @@ from django.contrib.auth.models import User
 
 class Interest(models.Model):
     name = models.CharField(max_length=64)
-    description = models.CharField(max_length=128)
 
 class University(models.Model):
-    name = models.CharField(max_length=64)
-    # TODO: Location, excluded for now
+    domain = models.CharField(max_length=64)
 
     def __unicode__(self):
         return u'%s' % (self.name)
@@ -21,12 +19,11 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     firstName = models.CharField(max_length=64)
     lastName = models.CharField(max_length=64)
-    regularEmail = models.EmailField()
+    publicEmail = models.EmailField()
 
-    #interests = models.ManyToManyField(Interest)
+    interests = models.ManyToManyField(Interest)
 
     university = models.ForeignKey(University, blank=True, null=True)
-    degree = models.CharField(max_length=64)
     about = models.TextField(max_length=6000)
     picture = models.ImageField(upload_to='profile_images', blank=True)
 
@@ -43,7 +40,6 @@ class Lunch(models.Model):
 
 class Feedback(models.Model):
     content = models.CharField(max_length=6000)
-    # TODO: is a numerical rating needed?
     rating = models.PositiveSmallIntegerField()
     recipient = models.ForeignKey(User, related_name='feedback_recipient')
     author = models.ForeignKey(User, related_name='feedback_author')
@@ -56,12 +52,19 @@ class Feedback(models.Model):
 
 class TimeInterval(models.Model):
     user = models.ForeignKey(User)
-    timeFrom = models.DateTimeField()
-    timeTo = models.DateTimeField()
+    time = models.TimeField()
+    day = models.PositiveSmallIntegerField()
 
-class Message(models.Model):
-    content = models.CharField(max_length=6000)
-    author = models.ForeignKey(User, related_name='message_author')
-    recipient = models.ForeignKey(User, related_name='message_recipient')
-    time = models.DateTimeField()
+#class Message(models.Model):
+#    content = models.CharField(max_length=6000)
+#    author = models.ForeignKey(User, related_name='message_author')
+#    recipient = models.ForeignKey(User, related_name='message_recipient')
+#    time = models.DateTimeField()
     # TODO: excluded boolean isMessageRead, implement later
+
+class Notification(models.Model):
+    userOne = models.ForeignKey(User, related_name='userone')
+    userTwo = models.ForeignKey(User, related_name='usertwo')
+    acceptedOne = models.BooleanField()
+    acceptedTwo = models.BooleanField()
+    available = models.DateTimeField()

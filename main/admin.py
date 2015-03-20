@@ -1,6 +1,5 @@
 from django.contrib import admin
-from main.models import Interest, University, UserProfile
-from main.models import Lunch, Feedback, TimeInterval, Message
+from main.models import *
                         
 						
 # Register your models here.
@@ -11,4 +10,4 @@ admin.site.register(UserProfile)
 admin.site.register(Lunch)
 admin.site.register(Feedback)
 admin.site.register(TimeInterval)
-admin.site.register(Message)
+admin.site.register(Notification)
