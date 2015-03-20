@@ -31,8 +31,8 @@ class UserProfile(models.Model):
 
 class Lunch(models.Model):
     # TODO: Consider renaming these two
-    userOne = models.ForeignKey(User, related_name='userone')
-    userTwo = models.ForeignKey(User, related_name='usertwo')
+    userOne = models.ForeignKey(User, related_name='uone')
+    userTwo = models.ForeignKey(User, related_name='utwo')
     date = models.DateTimeField()
 
     class Meta:
@@ -65,6 +65,6 @@ class TimeInterval(models.Model):
 class Notification(models.Model):
     userOne = models.ForeignKey(User, related_name='userone')
     userTwo = models.ForeignKey(User, related_name='usertwo')
-    acceptedOne = models.BooleanField()
-    acceptedTwo = models.BooleanField()
+    acceptedOne = models.BooleanField(default=False)
+    acceptedTwo = models.BooleanField(default=False)
     available = models.DateTimeField()
