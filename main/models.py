@@ -23,6 +23,7 @@ class UserProfile(models.Model):
 
     interests = models.ManyToManyField(Interest)
 
+    # Can be blank/null for now
     university = models.ForeignKey(University, blank=True, null=True)
     about = models.TextField(max_length=6000)
     picture = models.ImageField(upload_to='profile_images', blank=True)

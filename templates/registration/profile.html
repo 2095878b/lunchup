@@ -13,9 +13,21 @@
 	<p>Username: {{ user.username }}</p>
 	<p>Email: {{ user.email }}</p>
     {% if profile %}
-        {% for item in profile %}
-            <p>{{ item }}</p>
-        {% endfor %}
+        {% if profile.firstName %}
+            <p>First name: {{ profile.firstName }}</p>
+        {% endif %}
+        {% if profile.lastName %}
+            <p>Last name: {{ profile.lastName }}</p>
+        {% endif %}
+        {% if profile.publicEmail %}
+            <p>Public email: {{ profile.publicEmail }}</p>
+        {% endif %}
+        {% if profile.about %}
+            <p>About: {{ profile.about }}</p>
+        {% endif %}
+        {% if profile.interests %}
+            <p>Has interests</p>
+        {% endif %}
     {% endif %}
     <p><a href="{% url 'edit_profile' %}">Edit profile</a></p>
 
