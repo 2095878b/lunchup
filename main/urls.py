@@ -9,6 +9,5 @@ urlpatterns = patterns('',
     url(r'^profile/(?P<user_id>[0-9]+)/$', views.profile, name='profile'),
     url(r'^availability/$', views.avail, name='avail'),
     url(r'^notifications/$', views.notifications, name='notifications'),
-    url(r'^history/$', views.history, name='history'),
-	url(r'^edit_profile/$', views.edit_profile, name='edit_profile'),
+    url(r'^edit_profile/$', views.edit_profile, name='edit_profile'),
 )
