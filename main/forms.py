@@ -17,7 +17,8 @@ class UserProfileForm(forms.ModelForm):
     about = forms.CharField(label='About me', help_text="", widget=forms.Textarea(attrs={'cols': 45, 'rows': 5}, ), required=False)
     picture = forms.ImageField(label='Profile picture', required=False)
 
-    birthday = forms.DateField(label='Date of birth', widget=extras.SelectDateWidget, required=False)
+    years = [i for i in range(1900, 2002, 1)]
+    birthday = forms.DateField(label='Date of birth', widget=extras.SelectDateWidget(years=years), required=False)
 
     class Meta:
         model = UserProfile
