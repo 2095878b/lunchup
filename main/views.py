@@ -46,7 +46,7 @@ def add_details(request):
         profile_form = UserProfileForm()
     return render(request, 'registration/profile_registration.html', {'profile_form': profile_form})
 
-@login_required
+'''@login_required
 def edit_profile(request):
     try:
         user_profile = UserProfile.objects.get(user=request.user)
@@ -66,7 +66,7 @@ def edit_profile(request):
             profile_updated.save()
             return redirect('myprofile')
     form = UserProfileForm(instance=user_profile)
-    return render(request, 'registration/profile_edit.html', {'profile_form': form})
+    return render(request, 'registration/profile_edit.html', {'profile_form': form})'''
 
 # Timetabling
 def avail(request):

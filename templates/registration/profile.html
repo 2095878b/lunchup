@@ -9,27 +9,28 @@
 	<h1>User Profile</h1>
 </div>
 <div class="hero-unit">
-	
-	<p>Username: {{ user.username }}</p>
-	<p>Email: {{ user.email }}</p>
-    {% if profile %}
-        {% if profile.firstName %}
-            <p>First name: {{ profile.firstName }}</p>
-        {% endif %}
-        {% if profile.lastName %}
-            <p>Last name: {{ profile.lastName }}</p>
-        {% endif %}
-        {% if profile.publicEmail %}
-            <p>Public email: {{ profile.publicEmail }}</p>
-        {% endif %}
-        {% if profile.about %}
-            <p>About: {{ profile.about }}</p>
-        {% endif %}
-        {% if profile.interests %}
-            <p>Has interests</p>
-        {% endif %}
-    {% endif %}
-    <p><a href="{% url 'edit_profile' %}">Edit profile</a></p>
-
+	<p>User: {{ user.username }}</p>
+	<p>Real name: <span id ="realname"></span></p>
+	<p id="email"></p>
+    <p>About me: <span id ="about"></span></p>
 </div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $.ajax({
+          url: '/api/v1/profile/{{ profile.id }}/?format=json',
+          type: 'GET',
+          accepts: 'application/json',
+          dataType: 'json',
+          success: function(data, status) {
+              $("#about").html(data["about"]);
+              $("#realname").html(data["firstName"] + " " + data["lastName"]);
+              $("#email").html("<a href='mailto:" + data["publicEmail"] + "'>Mail me</a>");
+              alert('response: ' + JSON.stringify(data));
+          },
+          error: function(data, status) {
+              alert('Something went wrong: ' + data);
+          }
+        });
+    });
+</script>
 {% endblock %}
