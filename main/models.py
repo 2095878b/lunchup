@@ -17,8 +17,7 @@ class University(models.Model):
 class UserProfile(models.Model):
     # TODO: Check the constraints
     user = models.OneToOneField(User)
-    firstName = models.CharField(max_length=64)
-    lastName = models.CharField(max_length=64)
+    fullName = models.CharField(max_length=64)
     publicEmail = models.EmailField()
 
     interests = models.ManyToManyField(Interest)

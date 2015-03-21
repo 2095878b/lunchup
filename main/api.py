@@ -15,3 +15,4 @@ class UserProfileResource(ModelResource):
         resource_name = 'profile'
         authorization = Authorization()
         excludes = ['user', 'university']
+        allowed_methods = ['get', 'post', 'put', 'patch']

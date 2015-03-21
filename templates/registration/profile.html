@@ -10,9 +10,9 @@
 </div>
 <div class="hero-unit">
 	<p>User: {{ user.username }}</p>
-	<p>Real name: <span id ="realname"></span></p>
-	<p id="email"></p>
-    <p>About me: <span id ="about"></span></p>
+	<p>Real name: <span id ="fullName" class="editableText"></span></p>
+	<p>Email: <div id="publicEmail" class="editableText"></div></p>
+    <p>About me: <div class="editableArea" id ="about"></div></p>
 </div>
 <script type="text/javascript">
     $(document).ready(function(){
@@ -23,14 +23,46 @@
           dataType: 'json',
           success: function(data, status) {
               $("#about").html(data["about"]);
-              $("#realname").html(data["firstName"] + " " + data["lastName"]);
-              $("#email").html("<a href='mailto:" + data["publicEmail"] + "'>Mail me</a>");
-              alert('response: ' + JSON.stringify(data));
+              $("#fullName").html(data["fullName"]);
+              $("#publicEmail").html(data["publicEmail"]);
           },
           error: function(data, status) {
               alert('Something went wrong: ' + data);
           }
         });
+    });
+    // Function that links tastypie with jeditable
+    function tastypie(value, settings) {
+        $.ajax({
+            headers: {'X-HTTP-Method-Override': 'PATCH'},
+            url: '/api/v1/profile/{{ profile.id }}/',
+            type: 'POST',
+            accepts: 'application/json',
+            contentType: 'application/json',
+            dataType: 'json',
+            data: '{"'+ this.id +'" : "'+ value +'"}',
+            processData: false,
+
+            success: function(data, status) {
+              //alert('response: ' + JSON.stringify(data));
+            },
+            error: function(data, status) {
+                //alert('Something went wrong: ' + JSON.stringify(data));
+            }
+        });
+        return value;
+    }
+    // Use editableText class for editable text areas
+    $('.editableText').editable(tastypie, {
+        type : 'text',
+        submit : 'Save',
+        tooltip : 'Click to edit...'
+    });
+    // Use editableArea class for editable text areas
+    $('.editableArea').editable(tastypie, {
+        type : 'textarea',
+        submit : 'Save',
+        tooltip : 'Click to edit...'
     });
 </script>
 {% endblock %}
