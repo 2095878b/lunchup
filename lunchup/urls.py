@@ -7,7 +7,7 @@ from tastypie.api import Api
 
 class MyRegistrationView(RegistrationView):
     def get_success_url(self, request, user):
-        return '/edit_profile/'
+        return '/'
 
 
 urlpatterns = patterns('',
