@@ -1,7 +1,39 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
+from django_ajax.decorators import ajax
 from main.forms import UserProfileForm
 from main.models import *
+
+
+# TODO: Major bug here. edit_profile can only save one field
+# the other fields get cleared for some reason
+@ajax
+@login_required
+def edit_profile(request):
+    try:
+        user_profile = UserProfile.objects.get(user=request.user)
+        profile_form = UserProfileForm(data={request.POST['name']:request.POST['value']},instance=user_profile)
+        if profile_form.is_valid():
+            user_profile = profile_form.save(commit=False)
+            user_profile.save()
+    except:
+        return {'status':'error', 'msg':'Unable to save field.'}
+
+def upload_picture(request):
+    if request.method == 'POST':
+        try:
+            user_profile = UserProfile.objects.get(user=request.user)
+            if 'picture' in request.FILES:
+                try:
+                    user_profile.picture = request.FILES['picture']
+                    user_profile.save()
+                except:
+                    pass
+        except:
+            pass
+        return redirect('/')
+    else:
+        return render(request, 'registration/upload_picture.html')
 
 def splash(request):
     return render(request, 'splash.html')
@@ -16,7 +48,6 @@ def notifications(request):
 def about(request):
     return render(request, 'main/about.html')
 
-
 def profile(request, user_id = None):
     if user_id is not None:
         context_dict = {'user': User.objects.get(id=user_id)}
@@ -26,9 +57,8 @@ def profile(request, user_id = None):
         context_dict['profile'] = UserProfile.objects.get(user=context_dict['user'])
     except:
         context_dict['profile'] = None
-
     return render(request, 'registration/profile.html', context_dict)
-
+'''
 def add_details(request):
     if request.method == 'POST':
         profile_form = UserProfileForm(data=request.POST)
@@ -45,8 +75,7 @@ def add_details(request):
     else:
         profile_form = UserProfileForm()
     return render(request, 'registration/profile_registration.html', {'profile_form': profile_form})
-
-'''@login_required
+@login_required
 def edit_profile(request):
     try:
         user_profile = UserProfile.objects.get(user=request.user)

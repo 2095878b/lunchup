@@ -38,7 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'main',
     'registration',
-    'tastypie',
+    'django_ajax',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -79,7 +79,6 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 STATIC_PATH = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
@@ -100,3 +99,5 @@ ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
 LOGIN_REDIRECT_URL = '/'
 LOGIN_URL = '/accounts/login/'
+
+AJAXIMAGE_AUTH_TEST = lambda u: True

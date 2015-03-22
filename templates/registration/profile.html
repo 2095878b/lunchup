@@ -10,59 +10,39 @@
 </div>
 <div class="hero-unit">
 	<p>User: {{ user.username }}</p>
-	<p>Real name: <span id ="fullName" class="editableText"></span></p>
-	<p>Email: <div id="publicEmail" class="editableText"></div></p>
-    <p>About me: <div class="editableArea" id ="about"></div></p>
+    <p><a href="{% url 'upload_picture' %}">
+        {% if profile.picture %}
+            <img src="{{ profile.picture.url }}">
+        {% else %}
+            <img src="http://placehold.it/150x200">
+        {% endif %}
+    </a></p>
+	<p>Real name: <a href="#" id="fullName" data-type="text" data-pk="{{ profile.id }}" data-url="/edit_profile/" data-title="Enter your full name">{{ profile.fullName }}</a></p>
+	<p>Email: <a href="#" id="publicEmail" data-type="text" data-pk="{{ profile.id }}" data-url="/edit_profile/" data-title="Enter your public email">{{ profile.publicEmail }}</a></p>
+    <p>About me: <a href="#" id="about" data-type="textarea" data-pk="{{ profile.id }}" data-url="/edit_profile/" data-title="Tell us something about yourself">{{ profile.about }}</a></p>
+
 </div>
 <script type="text/javascript">
-    $(document).ready(function(){
-        $.ajax({
-          url: '/api/v1/profile/{{ profile.id }}/?format=json',
-          type: 'GET',
-          accepts: 'application/json',
-          dataType: 'json',
-          success: function(data, status) {
-              $("#about").html(data["about"]);
-              $("#fullName").html(data["fullName"]);
-              $("#publicEmail").html(data["publicEmail"]);
-          },
-          error: function(data, status) {
-              alert('Something went wrong: ' + data);
-          }
-        });
+$(document).ready(function() {
+    $.ajaxSetup({
+      data: {csrfmiddlewaretoken: '{{ csrf_token }}'}
     });
-    // Function that links tastypie with jeditable
-    function tastypie(value, settings) {
-        $.ajax({
-            headers: {'X-HTTP-Method-Override': 'PATCH'},
-            url: '/api/v1/profile/{{ profile.id }}/',
-            type: 'POST',
-            accepts: 'application/json',
-            contentType: 'application/json',
-            dataType: 'json',
-            data: '{"'+ this.id +'" : "'+ value +'"}',
-            processData: false,
-
-            success: function(data, status) {
-              //alert('response: ' + JSON.stringify(data));
-            },
-            error: function(data, status) {
-                //alert('Something went wrong: ' + JSON.stringify(data));
-            }
-        });
-        return value;
-    }
-    // Use editableText class for editable text areas
-    $('.editableText').editable(tastypie, {
-        type : 'text',
-        submit : 'Save',
-        tooltip : 'Click to edit...'
+    // Make fields editable
+    $('#fullName').editable({
+        success: function(response, newValue) {
+            if(response.status == 'error') return response.msg;
+        }
     });
-    // Use editableArea class for editable text areas
-    $('.editableArea').editable(tastypie, {
-        type : 'textarea',
-        submit : 'Save',
-        tooltip : 'Click to edit...'
+    $('#publicEmail').editable({
+        success: function(response, newValue) {
+            if(response.status == 'error') return response.msg;
+        }
     });
+    $('#about').editable({
+        success: function(response, newValue) {
+            if(response.status == 'error') return response.msg;
+        }
+    });
+});
 </script>
 {% endblock %}
