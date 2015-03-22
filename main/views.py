@@ -19,6 +19,10 @@ def edit_profile(request):
     except:
         return {'status':'error', 'msg':'Unable to save field.'}
 
+@ajax
+def get_interests(request):
+    return Interest.objects.all()
+
 def upload_picture(request):
     if request.method == 'POST':
         try:
@@ -34,6 +38,7 @@ def upload_picture(request):
         return redirect('/')
     else:
         return render(request, 'registration/upload_picture.html')
+
 
 def splash(request):
     return render(request, 'splash.html')

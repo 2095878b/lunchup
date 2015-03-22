@@ -17,10 +17,11 @@
             <img src="http://placehold.it/150x200">
         {% endif %}
     </a></p>
+
 	<p>Real name: <a href="#" id="fullName" data-type="text" data-pk="{{ profile.id }}" data-url="/edit_profile/" data-title="Enter your full name">{{ profile.fullName }}</a></p>
 	<p>Email: <a href="#" id="publicEmail" data-type="text" data-pk="{{ profile.id }}" data-url="/edit_profile/" data-title="Enter your public email">{{ profile.publicEmail }}</a></p>
     <p>About me: <a href="#" id="about" data-type="textarea" data-pk="{{ profile.id }}" data-url="/edit_profile/" data-title="Tell us something about yourself">{{ profile.about }}</a></p>
-
+    <p>Interests: <a href="#" id="interests" data-type="select2" data-pk="1" data-title="Enter tags" class="editable editable-click editable-open" data-original-title="" title="">html, javascript</a></p>
 </div>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -41,6 +42,31 @@ $(document).ready(function() {
     $('#about').editable({
         success: function(response, newValue) {
             if(response.status == 'error') return response.msg;
+        }
+    });
+    // Interests
+    $('#interests').editable({
+        inputclass: 'input-large',
+        select2: {
+            tags: ['html', 'javascript', 'css', 'ajax'],
+            tokenSeparators: [",", " "],
+            ajax: {
+                multiple: true,
+                url: "/get_interests/",
+                dataType: "json",
+                data: function(term) {
+                    alert(term);
+                    return {
+                        term: term
+                    };
+                },
+                results: function(data) {
+                    alert(data);
+                    return {
+                        results: data
+                    };
+                }
+            }
         }
     });
 });

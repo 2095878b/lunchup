@@ -10,4 +10,6 @@ urlpatterns = patterns('',
     url(r'^availability/$', views.avail, name='avail'),
     url(r'^notifications/$', views.notifications, name='notifications'),
     url(r'^upload_picture/$', views.upload_picture, name='upload_picture'),
+    url(r'^edit_profile/$', views.edit_profile, name='edit_profile'),
+    url(r'^get_interests/$', views.get_interests, name='get_interests'),
 )
