@@ -23,6 +23,7 @@ def edit_profile(request):
 def get_interests(request):
     return Interest.objects.all()
 
+@login_required
 def upload_picture(request):
     if request.method == 'POST':
         try:
@@ -43,9 +44,12 @@ def upload_picture(request):
 def splash(request):
     return render(request, 'splash.html')
 
+# For now this serves as our splash page
+#@login_required
 def how_it_works(request):
     return render(request, 'main/how_it_works.html')
 
+@login_required
 def notifications(request):
     context_dict = {}
     return render(request, 'main/notifications.html', context_dict)
@@ -63,45 +67,13 @@ def profile(request, user_id = None):
         context_dict['profile'] = UserProfile.objects.get(user=context_dict['user'])
     except:
         context_dict['profile'] = None
-    return render(request, 'registration/profile.html', context_dict)
-'''
-def add_details(request):
-    if request.method == 'POST':
-        profile_form = UserProfileForm(data=request.POST)
-        if profile_form.is_valid():
-            profile = profile_form.save(commit=False)
-            profile.user = User.objects.get(id=request.user.id)
-            if 'picture' in request.FILES:
-                try:
-                    profile.picture = request.FILES['picture']
-                except:
-                    pass
-            profile.save()
-            return redirect('index')
+
+    # Booleans don't work in templates for some reason, using None to avoid that
+    if user_id is None or user_id == request.user.id:
+        context_dict['myprofile'] = True
     else:
-        profile_form = UserProfileForm()
-    return render(request, 'registration/profile_registration.html', {'profile_form': profile_form})
-@login_required
-def edit_profile(request):
-    try:
-        user_profile = UserProfile.objects.get(user=request.user)
-    except:
-        user_profile = None
-    if request.method == 'POST':
-        profile_form = UserProfileForm(data=request.POST, instance=user_profile)
-        if profile_form.is_valid():
-            profile_updated = profile_form.save(commit=False)
-            if user_profile is None:
-                profile_updated.user = User.objects.get(id=request.user.id)
-            if 'picture' in request.FILES:
-                try:
-                    profile_updated.picture = request.FILES['picture']
-                except:
-                    pass
-            profile_updated.save()
-            return redirect('myprofile')
-    form = UserProfileForm(instance=user_profile)
-    return render(request, 'registration/profile_edit.html', {'profile_form': form})'''
+        context_dict['myprofile'] = None
+    return render(request, 'registration/profile.html', context_dict)
 
 # Timetabling
 def avail(request):
