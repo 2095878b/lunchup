@@ -1,4 +1,3 @@
-from ajaximage.widgets import AjaxImageWidget
 from django import forms
 from main.models import *
 from django.forms import extras
