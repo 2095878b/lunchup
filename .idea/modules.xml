@@ -3,8 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/lunchup.iml" filepath="$PROJECT_DIR$/.idea/lunchup.iml" />
-      <module fileurl="file://H:/tangowithdjango/.idea/tangowithdjango.iml" filepath="H:/tangowithdjango/.idea/tangowithdjango.iml" />
     </modules>
   </component>
 </project>
-
