@@ -14,11 +14,17 @@ class University(models.Model):
     class Meta:
         verbose_name_plural = "universities"
 
+class TimeInterval(models.Model):
+    time = models.TimeField()
+    day = models.PositiveSmallIntegerField()
+
+
 class UserProfile(models.Model):
     # TODO: Check the constraints
     user = models.OneToOneField(User)
     fullName = models.CharField(max_length=64)
     publicEmail = models.EmailField()
+    availability = models.ManyToManyField(TimeInterval)
 
     interests = models.ManyToManyField(Interest)
 
@@ -49,11 +55,6 @@ class Feedback(models.Model):
 
     class Meta:
         verbose_name_plural = "feedback"
-
-class TimeInterval(models.Model):
-    user = models.ForeignKey(User)
-    time = models.TimeField()
-    day = models.PositiveSmallIntegerField()
 
 #class Message(models.Model):
 #    content = models.CharField(max_length=6000)
