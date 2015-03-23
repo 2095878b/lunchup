@@ -53,6 +53,7 @@ def notifications(request):
 def about(request):
     return render(request, 'main/about.html')
 
+# TODO: If profile is empty - it does not participate in 'matchmaking'
 def profile(request, user_id = None):
     if user_id is not None:
         context_dict = {'user': User.objects.get(id=user_id)}

@@ -43,7 +43,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#"><img src="{% static 'images/lunch-up_logo_small.png' %}" width="78" style="margin-top:-10px; margin-left:20px;" /></a>
+          <a class="navbar-brand" href="{% url 'how_it_works' %}"><img src="{% static 'images/lunch-up_logo_small.png' %}" width="78" style="margin-top:-10px; margin-left:20px;" /></a>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -60,7 +60,7 @@
           </ul>
           {% if user.is_authenticated %}
               <ul class="nav navbar-nav pull-right">
-                <li><a href="{% url 'auth_login' %}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;&nbsp;Logout</a></li>
+                <li><a href="{% url 'auth_logout' %}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>&nbsp;&nbsp;Logout</a></li>
               </ul>
           {% endif %}
 
