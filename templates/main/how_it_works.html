@@ -1,10 +1,60 @@
 {% extends 'base.html' %}
 
-{% load staticfiles %}
-
 {% block title %}HIW{% endblock %}
 
 {% block body_block %}
-        <div class="page-header"><h1>Some stuff</h1></div>
-        <p>What's happening?</p>
+      <div class="col-xs-12 col-sm-12">
+          <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+          </p>
+          <div class="jumbotron_two">
+            <h1><span class="glyphicon glyphicon-home" aria-hidden="true"></span> <span class="font_styled">How it works</span></h1>
+            <p style="font-size:16px;" class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It's fast and simple to get started with Lunch Up.</p>
+          </div>
+          <div class="row" style="padding:15px;">
+                      <div class="col-md-3 howitworks_col" style="background-color:#ffffff;">
+                        <h2><div class="numberCircle">1</div>&nbsp;&nbsp;&nbsp;<span class="font_styled" style="color:#FF003C; font-weight:bold;">Availablity</span></h2>
+                        <br />
+                        <ul>
+                            <li>item one</li>
+                            <li>item two</li>
+                            <li>item three</li>
+                        </ul>
+                        <br />
+                      </div>
+
+                      <div class="col-md-3 howitworks_col" style="background-color:#ffffff;">
+                        <h2><div class="numberCircle">2</div>&nbsp;<span class="font_styled" style="color:#FF8A00; font-weight:bold;">Notifications</span></h2>
+                        <br />
+                        <ul>
+                            <li>item one</li>
+                            <li>item two</li>
+                            <li>item three</li>
+                        </ul>
+                        <br />
+                      </div>
+
+                      <div class="col-md-3 howitworks_col" style="background-color:#ffffff;">
+                        <h2><div class="numberCircle">3</div>&nbsp;&nbsp;&nbsp;<span class="font_styled" style="color:#FABE28; font-weight:bold;">Lunch Up!</span></h2>
+                        <br />
+                        <ul>
+                            <li>item one</li>
+                            <li>item two</li>
+                            <li>item three</li>
+                        </ul>
+                        <br />
+                      </div>
+          </div>
+
+
+          <div class="row" style="padding:15px;">
+                    <div class="col-md-3 center">
+                      <button class="btn btn-success btn-lg center" type="button" aria-expanded="false">
+                        Let's get started: add your availability<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    </button>
+                    <br /><br /><br /><br /><br /><br /><br />
+                        </div>
+
+            </div>
+      </div>
 {% endblock %}

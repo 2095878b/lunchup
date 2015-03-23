@@ -1,0 +1,47 @@
+body {
+    background-color: #f9f9f9;
+}
+
+.jumbotron_two {
+
+  margin-top:20px;
+  padding:10px;
+
+}
+
+.caret-right {
+    border-bottom: 4px solid transparent;
+    border-top: 4px solid transparent;
+    border-left: 4px solid;
+    display: inline-block;
+    height: 0;
+    opacity: 0.3;
+    vertical-align: top;
+    width: 0;
+}
+
+.font_styled {
+    font-family: 'Ubuntu';
+}
+
+.howitworks_col {
+    float:left;
+    margin: 20px 0px 20px 60px;
+    border: 2px solid;
+    border-radius: 25px;
+    border-color: #dedede;
+}
+
+.numberCircle {
+    border-radius: 50%;
+    behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+    width: 56px;
+    height: 56px;
+    padding: 8px;
+    background: #fff;
+    border: 2px solid black;
+    color: black;
+    text-align: center;
+    font: 32px Arial, sans-serif;
+    display: inline-block;
+}

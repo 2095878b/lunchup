@@ -5,24 +5,107 @@
 {% block title %} Profile {% endblock %}
 
 {% block body_block %}
-<div class="page-header">
-	<h1>User Profile</h1>
-</div>
-<div class="hero-unit">
-	<p>User: {{ user.username }}</p>
-    <p><a href="{% url 'upload_picture' %}">
-        {% if profile.picture %}
-            <img src="{{ profile.picture.url }}">
-        {% else %}
-            <img src="http://placehold.it/150x200">
-        {% endif %}
-    </a></p>
+    <div class="row row-offcanvas row-offcanvas-right">
+        <div class="col-xs-12 col-sm-9">
+          <p class="pull-right visible-xs">
+            <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+          </p>
+          <div class="jumbotron_two">
+            <h1><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <span class="font_styled">Profile</span></h1>
+            <p style="font-size:16px;" class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See who you've been matched up with, view their profiles and arrange to lunch up!</p>
+          </div>
+          <div class="row" style="padding:15px;">
 
-	<p>Real name: <a href="#" id="fullName" data-type="text" data-pk="{{ profile.id }}" data-url="/edit_profile/" data-title="Enter your full name">{{ profile.fullName }}</a></p>
-	<p>Email: <a href="#" id="publicEmail" data-type="text" data-pk="{{ profile.id }}" data-url="/edit_profile/" data-title="Enter your public email">{{ profile.publicEmail }}</a></p>
-    <p>About me: <a href="#" id="about" data-type="textarea" data-pk="{{ profile.id }}" data-url="/edit_profile/" data-title="Tell us something about yourself">{{ profile.about }}</a></p>
-    <p>Interests: <a href="#" id="interests" data-type="select2" data-pk="1" data-title="Enter tags" class="editable editable-click editable-open" data-original-title="" title="">html, javascript</a></p>
-</div>
+              <div class="col-md-12" style="border: 2px solid; border-radius: 25px; border-color: #dedede; margin-bottom:15px; padding:10px; background-color:#ffffff;">
+
+                <div class="col-md-3 text-center" style="margin:9px 30px 0 0;" style="background-color:#0000ff;">
+                    <a href="{% url 'upload_picture' %}">
+                    {% if profile.picture %}
+                        <img src="../../static/images/ot.jpg" width="190" class="img-circle">
+                        <!--  for now <img src="{{ profile.picture.url }}">!-->
+                    {% else %}
+                        <img src="../../static/images/ot.jpg" width="190" class="img-circle">
+                    {% endif %}
+                    </a>
+                    <br /><br /><br />
+                    <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;&nbsp;<span style="font-size:20px;" class="font_styled"><a href="#" id="publicEmail" data-type="text" data-pk="{{ profile.id }}" data-url="/edit_profile/" data-title="Enter your public email">{{ profile.publicEmail }}</a></span>
+                </div>
+
+                <div class="col-md-8">
+                  <br /><span style="font-size:26px; font-weight:bold;" class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;Full name: <a href="#" id="fullName" data-type="text" data-pk="{{ profile.id }}" data-url="/edit_profile/" data-title="Enter your full name">{{ profile.fullName }}</a></span>
+                  <br /><br />
+                  <span class="glyphicon glyphicon-edit" aria-hidden="true"></span><span style="font-size:24px;" class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;About me</span>
+                  <ul><li><a href="#" id="about" data-type="textarea" data-pk="{{ profile.id }}" data-url="/edit_profile/" data-title="Tell us something about yourself">{{ profile.about }}</a></li></ul><hr />
+
+                  <span class="glyphicon glyphicon-time" aria-hidden="true"></span><span style="font-size:24px;" class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;Available</span>
+                  <br /><br />
+                  <ul>
+                      <li>13:00 - 14:00, Wednesdays</li>
+                      <li>14:00 - 15:00, Wednesdays</li>
+                      <li>12:00 - 13:00, Fridays</li>
+                  </ul><hr />
+
+
+                  <span class="glyphicon glyphicon-list" aria-hidden="true"></span><span style="font-size:24px;" class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;Interests</span>
+                  <br /><br />
+                  <ul>
+                      <a href="#" id="interests" data-type="select2" data-pk="1" data-title="Enter tags" class="editable editable-click editable-open" data-original-title="" title="">html, javascript</a>
+                      <li>Sports</li>
+                      <li>Psychology</li>
+                      <li>Movies</li>
+                      <li>Eating out</li>
+                      <li>Traveling, discovering new places</li>
+                  </ul><hr />
+
+                  <span class="glyphicon glyphicon-comment" aria-hidden="true"></span><span style="font-size:24px;" class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;Feedback</span>
+                  <br /><br />
+
+                      <span href="#" class="list-group-item" style="padding:15px; border:0px;"><img src="../../static/images/profile_pics/10_m.jpg" width="40" class="img-circle" style="float:left; margin-right:10px;" />&ldquo;Lorem ipsum dolor sit amet, vim omnesque delicata in, dicat cotidieque ne sed. Lorem tollit denique usu ei, animal reformidans vim at.&rdquo;<br />&mdash;<a href="#">Harry Starry</a></span>
+                      <hr />
+                      <span href="#" class="list-group-item" style="padding:15px; border:0px;"><img src="../../static/images/profile_pics/10_m.jpg" width="40" class="img-circle" style="float:left; margin-right:10px;" />&ldquo;Lorem ipsum dolor sit amet, vim omnesque delicata in, dicat cotidieque ne sed. Lorem tollit denique usu ei, animal reformidans vim at.&rdquo;<br />&mdash;<a href="#">Harry Starry</a></span>
+                      <hr />
+                      <span href="#" class="list-group-item" style="padding:15px; border:0px;"><img src="../../static/images/profile_pics/10_m.jpg" width="40" class="img-circle" style="float:left; margin-right:10px;" />&ldquo;Lorem ipsum dolor sit amet, vim omnesque delicata in, dicat cotidieque ne sed. Lorem tollit denique usu ei, animal reformidans vim at.&rdquo;<br />&mdash;<a href="#">Harry Starry</a></span>
+
+
+                      <div>
+                            <nav>
+                          <ul class="pagination">
+                            <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                            <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
+                            <li><a href="#">2 <span class="sr-only">(current)</span></a></li>
+                            <li><a href="#">3 <span class="sr-only">(current)</span></a></li>
+                            <li><a href="#">4 <span class="sr-only">(current)</span></a></li>
+                            <li><a href="#">5 <span class="sr-only">(current)</span></a></li>
+                            <li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                          </ul>
+                        </nav>
+                      </div>
+                  <hr />
+
+                  <span class="glyphicon glyphicon-comment" aria-hidden="true"></span><span style="font-size:24px;" class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;Share your feedback</span>
+                  <br /><br />
+
+                      <textarea class="form-control" rows="3"></textarea><br />
+                      <button type="button" class="btn btn-success">Post</button><br /><br />
+
+                </div>
+
+              </div>
+          </div><!--/row-->
+    </div><!--/.col-xs-12.col-sm-9-->
+
+    <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+      <h3><span class="glyphicon glyphicon-check" aria-hidden="true"></span> <span class="font_styled">Tips</span></h3><span class="font_styled">Useful ideas to help you get the most from Lunch Up.</span><br /><br />
+      <div class="list-group">
+        <span href="#" class="list-group-item" style="padding:15px;">1. Lorem ipsum dolor sit amet, vim omnesque delicata in, dicat cotidieque ne sed. Lorem tollit denique usu ei, animal reformidans vim at.</span>
+        <span href="#" class="list-group-item" style="padding:15px;">2. Lorem ipsum dolor sit amet, vim omnesque delicata in, dicat cotidieque ne sed.</span>
+        <span href="#" class="list-group-item" style="padding:15px;">3. Tollit denique usu ei, animal reformidans vim at.</span>
+      </div>
+    </div><!--/.sidebar-offcanvas-->
+    </div><!--/row-->
+
+    <hr>
+
 <script type="text/javascript">
 $(document).ready(function() {
     $.ajaxSetup({

@@ -29,13 +29,6 @@ class UserProfile(models.Model):
 
     birthday = models.DateField(blank=True, null=True)
 
-    '''def save(self, *args, **kwargs):
-        # For automatic slug generation.
-        if not self.slug:
-            self.slug = slugify(self.title)[:50]
-
-        return super(Entry, self).save(*args, **kwargs)'''
-
 class Lunch(models.Model):
     # TODO: Consider renaming these two
     userOne = models.ForeignKey(User, related_name='uone')

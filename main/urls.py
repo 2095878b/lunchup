@@ -2,7 +2,7 @@ from django.conf.urls import patterns, url, include
 from main import views
 
 urlpatterns = patterns('',
-    url(r'^$', views.how_it_works, name='howitworks'),
+    url(r'^$', views.how_it_works, name='how_it_works'),
     url(r'^splash/$', views.splash, name='splash'),
     url(r'^about/$', views.about, name='about'),
     url(r'^profile/$', views.profile, name='myprofile'),
