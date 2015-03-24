@@ -15,8 +15,8 @@ class University(models.Model):
         verbose_name_plural = "universities"
 
 class TimeInterval(models.Model):
-    time = models.TimeField()
-    day = models.PositiveSmallIntegerField()
+    time = models.PositiveSmallIntegerField()
+    day = models.CharField(max_length=10)
 
 
 class UserProfile(models.Model):

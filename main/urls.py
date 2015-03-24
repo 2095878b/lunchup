@@ -12,4 +12,5 @@ urlpatterns = patterns('',
     url(r'^upload_picture/$', views.upload_picture, name='upload_picture'),
     url(r'^edit_profile/$', views.edit_profile, name='edit_profile'),
     url(r'^get_interests/$', views.get_interests, name='get_interests'),
+    url(r'^get_avail/$', views.get_avail, name='get_avail'),
 )

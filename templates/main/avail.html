@@ -48,29 +48,30 @@
                 </div>
 				&nbsp;&nbsp;&nbsp;
                 <div class="btn-group">
-                  <button type="button" class="btn btn-default dropdown-toggle btn-lg" aria-expanded="false">
-                    Add&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-right" aria-hidden="true">
-                  </button>
-                  <ul class="dropdown-menu" role="menu">
+                   <ul class="dropdown-menu" role="menu">
                     <li><a href="#">12:00 - 13:00</a></li>
                     <li><a href="#">13:00 - 14:00</a></li>
                     <li><a href="#">14:00 - 15:00</a></li>
                     <li><a href="#">15:00 - 16:00</a></li>
                   </ul>
+                  <button id="add" type="button" class="btn btn-default dropdown-toggle btn-lg" aria-expanded="false">
+                    Add&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-right" aria-hidden="true" />
+                  </button>
                 </div>
               </div>
-
-              <div class="col-md-12" style="border: 2px solid; border-radius: 25px; border-color: #dedede; margin-bottom:15px; padding:10px; background-color:#ffffff;">
-                <div class="col-md-12"><span style="font-size:20px;">12:00 on Mondays</span> <span style="font-size:22px;" class="pull-right glyphicon glyphicon-remove-circle" aria-hidden="true"></span></div>
-              </div>
-              <div class="col-md-12" style="border: 2px solid; border-radius: 25px; border-color: #dedede; margin-bottom:15px; padding:10px; background-color:#ffffff;">
-                <div class="col-md-12"><span style="font-size:20px;">14:00 on Wednesdays</span> <span style="font-size:22px;" class="pull-right glyphicon glyphicon-remove-circle" aria-hidden="true"></span></div>
-              </div>
-              <div class="col-md-12" style="border: 2px solid; border-radius: 25px; border-color: #dedede; margin-bottom:15px; padding:10px; background-color:#ffffff;">
-                <div class="col-md-12"><span style="font-size:20px;">15:00 on Wednesdays</span> <span style="font-size:22px;" class="pull-right glyphicon glyphicon-remove-circle" aria-hidden="true"></span></div>
-              </div>
-              <div class="col-md-12" style="border: 2px solid; border-radius: 25px; border-color: #dedede; margin-bottom:15px; padding:10px; background-color:#ffffff;">
-                <div class="col-md-12"><span style="font-size:20px;">12:00 on Fridays</span> <span style="font-size:22px;" class="pull-right glyphicon glyphicon-remove-circle" aria-hidden="true"></span></div>
+              <div id = "avail">
+                  <div class="col-md-12" style="border: 2px solid; border-radius: 25px; border-color: #dedede; margin-bottom:15px; padding:10px; background-color:#ffffff;">
+                    <div class="col-md-12"><span style="font-size:20px;">12:00 on Mondays</span> <span style="font-size:22px;" class="pull-right glyphicon glyphicon-remove-circle" aria-hidden="true"></span></div>
+                  </div>
+                  <div class="col-md-12" style="border: 2px solid; border-radius: 25px; border-color: #dedede; margin-bottom:15px; padding:10px; background-color:#ffffff;">
+                    <div class="col-md-12"><span style="font-size:20px;">14:00 on Wednesdays</span> <span style="font-size:22px;" class="pull-right glyphicon glyphicon-remove-circle" aria-hidden="true"></span></div>
+                  </div>
+                  <div class="col-md-12" style="border: 2px solid; border-radius: 25px; border-color: #dedede; margin-bottom:15px; padding:10px; background-color:#ffffff;">
+                    <div class="col-md-12"><span style="font-size:20px;">15:00 on Wednesdays</span> <span style="font-size:22px;" class="pull-right glyphicon glyphicon-remove-circle" aria-hidden="true"></span></div>
+                  </div>
+                  <div class="col-md-12" style="border: 2px solid; border-radius: 25px; border-color: #dedede; margin-bottom:15px; padding:10px; background-color:#ffffff;">
+                    <div class="col-md-12"><span style="font-size:20px;">12:00 on Fridays</span> <span style="font-size:22px;" class="pull-right glyphicon glyphicon-remove-circle" aria-hidden="true"></span></div>
+                  </div>
               </div>
           </div><!--/row-->
         </div><!--/.col-xs-12.col-sm-9-->
@@ -87,5 +88,17 @@
       </div><!--/row-->
 
       <hr>
-
+<script>
+$(document).ready(function() {
+    $.get('/get_avail/', function(data, status) {
+        $.each(data['content'], function(index, time){
+            $('#avail').append(JSON.stringify(time));
+        });
+    });
+    $(".dropdown-menu li a").click(function(){
+      var selText = $(this).text();
+      $(this).parents('.btn-group').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
+    });
+});
+</script>
 {% endblock %}

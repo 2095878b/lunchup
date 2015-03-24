@@ -23,6 +23,12 @@ def edit_profile(request):
 def get_interests(request):
     return Interest.objects.all()
 
+@ajax
+def get_avail(request):
+    up = UserProfile.objects.get(user=request.user)
+    return up.availability.all()
+
+
 @login_required
 def upload_picture(request):
     if request.method == 'POST':
