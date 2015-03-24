@@ -12,12 +12,15 @@ from main.models import *
 def edit_profile(request):
     try:
         user_profile = UserProfile.objects.get(user=request.user)
-        profile_form = UserProfileForm(data={request.POST['name']:request.POST['value']},instance=user_profile)
-        if profile_form.is_valid():
-            user_profile = profile_form.save(commit=False)
-            user_profile.save()
+        if request.POST['name'] == "about":
+            user_profile.about = request.POST['value']
+        if request.POST['name'] == "fullName":
+            user_profile.fullName = request.POST['value']
+        if request.POST['name'] == "publicEmail":
+            user_profile.publicEmail = request.POST['value']
+        user_profile.save()
     except:
-        return {'status':'error', 'msg':'Unable to save field.'}
+        return {'status': 'error', 'msg': 'Unable to save field.'}
 
 @ajax
 def get_interests(request):
@@ -27,6 +30,36 @@ def get_interests(request):
 def get_avail(request):
     up = UserProfile.objects.get(user=request.user)
     return up.availability.all()
+
+@ajax
+def add_avail(request):
+    time = int(request.POST['time'])
+    day = str(request.POST['day'])
+    if (time not in [12, 13, 14, 15] or day not in \
+            ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']):
+        return {'status':'error', 'msg':'Invalid data'}
+    try:
+        user_profile = UserProfile.objects.get(user=request.user)
+        availab = TimeInterval.objects.get(time=time, day=day)
+        user_profile.availability.add(availab)
+        user_profile.save()
+    except:
+        return {'status':'error', 'msg':'Something went wrong. Please relog.'}
+
+@ajax
+def rm_avail(request):
+    time = int(request.POST['time'])
+    day = str(request.POST['day'])
+    if (time not in [12, 13, 14, 15] or day not in \
+            ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']):
+        return {'status':'error', 'msg':'Invalid data'}
+    try:
+        user_profile = UserProfile.objects.get(user=request.user)
+        availab = TimeInterval.objects.get(time=time, day=day)
+        user_profile.availability.remove(availab)
+        user_profile.save()
+    except:
+        return {'status':'error', 'msg':'Something went wrong. Please relog.'}
 
 
 @login_required
@@ -84,4 +117,9 @@ def profile(request, user_id = None):
 # Timetabling
 def avail(request):
     context_dict = {}
+    try:
+        user_profile = UserProfile.objects.get(user=request.user)
+        context_dict['availabilities'] = user_profile.availability.all()
+    except:
+        pass
     return render(request, 'main/avail.html', context_dict)

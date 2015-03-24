@@ -13,4 +13,6 @@ urlpatterns = patterns('',
     url(r'^edit_profile/$', views.edit_profile, name='edit_profile'),
     url(r'^get_interests/$', views.get_interests, name='get_interests'),
     url(r'^get_avail/$', views.get_avail, name='get_avail'),
+    url(r'^add_avail/$', views.add_avail, name='add_avail'),
+    url(r'^rm_avail/$', views.rm_avail, name='rm_avail'),
 )

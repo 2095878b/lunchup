@@ -21,7 +21,7 @@
 
                 <!-- Single button -->
                 <div class="btn-group">
-                  <button type="button" class="btn btn-success dropdown-toggle btn-lg" data-toggle="dropdown" aria-expanded="false">
+                  <button id = "time" type="button" class="btn btn-success dropdown-toggle btn-lg" data-toggle="dropdown" aria-expanded="false">
                     What <b>time</b> suits you?&nbsp;&nbsp;&nbsp;<span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu" role="menu">
@@ -33,7 +33,7 @@
                 </div>
                 &nbsp;&nbsp;&nbsp;
                 <div class="btn-group">
-                  <button type="button" class="btn btn-success dropdown-toggle btn-lg" data-toggle="dropdown" aria-expanded="false">
+                  <button id = "day" type="button" class="btn btn-success dropdown-toggle btn-lg" data-toggle="dropdown" aria-expanded="false">
                     ...and also what <b>day</b> sounds good?&nbsp;&nbsp;&nbsp;<span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu" role="menu">
@@ -48,30 +48,21 @@
                 </div>
 				&nbsp;&nbsp;&nbsp;
                 <div class="btn-group">
-                   <ul class="dropdown-menu" role="menu">
-                    <li><a href="#">12:00 - 13:00</a></li>
-                    <li><a href="#">13:00 - 14:00</a></li>
-                    <li><a href="#">14:00 - 15:00</a></li>
-                    <li><a href="#">15:00 - 16:00</a></li>
-                  </ul>
                   <button id="add" type="button" class="btn btn-default dropdown-toggle btn-lg" aria-expanded="false">
                     Add&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-chevron-right" aria-hidden="true" />
                   </button>
                 </div>
               </div>
               <div id = "avail">
-                  <div class="col-md-12" style="border: 2px solid; border-radius: 25px; border-color: #dedede; margin-bottom:15px; padding:10px; background-color:#ffffff;">
-                    <div class="col-md-12"><span style="font-size:20px;">12:00 on Mondays</span> <span style="font-size:22px;" class="pull-right glyphicon glyphicon-remove-circle" aria-hidden="true"></span></div>
-                  </div>
-                  <div class="col-md-12" style="border: 2px solid; border-radius: 25px; border-color: #dedede; margin-bottom:15px; padding:10px; background-color:#ffffff;">
-                    <div class="col-md-12"><span style="font-size:20px;">14:00 on Wednesdays</span> <span style="font-size:22px;" class="pull-right glyphicon glyphicon-remove-circle" aria-hidden="true"></span></div>
-                  </div>
-                  <div class="col-md-12" style="border: 2px solid; border-radius: 25px; border-color: #dedede; margin-bottom:15px; padding:10px; background-color:#ffffff;">
-                    <div class="col-md-12"><span style="font-size:20px;">15:00 on Wednesdays</span> <span style="font-size:22px;" class="pull-right glyphicon glyphicon-remove-circle" aria-hidden="true"></span></div>
-                  </div>
-                  <div class="col-md-12" style="border: 2px solid; border-radius: 25px; border-color: #dedede; margin-bottom:15px; padding:10px; background-color:#ffffff;">
-                    <div class="col-md-12"><span style="font-size:20px;">12:00 on Fridays</span> <span style="font-size:22px;" class="pull-right glyphicon glyphicon-remove-circle" aria-hidden="true"></span></div>
-                  </div>
+                  {% if availabilities %}
+                      {% for avail in availabilities %}
+                          <div class="col-md-12" style="border: 2px solid; border-radius: 25px; border-color: #dedede; margin-bottom:15px; padding:10px; background-color:#ffffff;">
+                            <div class="col-md-12">
+                                <span style="font-size:20px;">{{ avail.time }}:00 on {{ avail.day }}s</span> <span style="font-size:22px;" class="pull-right glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+                            </div>
+                          </div>
+                      {% endfor %}
+                  {% endif %}
               </div>
           </div><!--/row-->
         </div><!--/.col-xs-12.col-sm-9-->
@@ -90,14 +81,36 @@
       <hr>
 <script>
 $(document).ready(function() {
-    $.get('/get_avail/', function(data, status) {
-        $.each(data['content'], function(index, time){
-            $('#avail').append(JSON.stringify(time));
-        });
+    $.ajaxSetup({
+        data: {csrfmiddlewaretoken: '{{ csrf_token }}'}
     });
     $(".dropdown-menu li a").click(function(){
       var selText = $(this).text();
       $(this).parents('.btn-group').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
+    });
+    $("#add").click(function(){
+        var time = $("#time").text();
+        time = time.substring(0, 2);
+        var day = $("#day").text();
+        day = day.substring(0, day.length - 1);
+        $.post('/add_avail/', {"time":time, "day":day}).done(function(data){
+            var markup = '<div class="col-md-12" style="border: 2px solid; border-radius: 25px; border-color: #dedede; margin-bottom:15px; padding:10px; background-color:#ffffff;">';
+            markup += '<div class="col-md-12"><span style="font-size:20px;">';
+            markup += time + ':00 on ' + day + 's';
+            markup += '</span> <span style="font-size:22px;" class="pull-right glyphicon glyphicon-remove-circle" aria-hidden="true"></span></div></div>';
+            $('#avail').append(markup);
+        });
+    });
+    $(".glyphicon-remove-circle").click(function(){
+        var elem = $(this).parent();
+        var avail = elem.text().trim();
+        var time = avail.split(' ')[0].substring(0, 2);
+        var day = avail.split(' ')[2];
+        day = day.substring(0, day.length - 1);
+        console.log(time + ',' + day);
+        $.post('/rm_avail/', {"time":time, "day":day}).done(function(data){
+            elem.parent().remove();
+        });
     });
 });
 </script>
