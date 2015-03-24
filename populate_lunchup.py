@@ -16,8 +16,8 @@ def add_user(username, email, password):
         u = User.objects.create_user(username, email, password)
     return u
 
-def add_user_profile(user, fullName, email, about, picture):
-    p = UserProfile.objects.get_or_create(user=user, fullName=fullName,
+def add_user_profile(user, fullname, email, about, picture):
+    p = UserProfile.objects.get_or_create(user=user, fullName=fullname,
                                           publicEmail=email, about=about, picture=picture)[0]
     return p
 
@@ -30,29 +30,29 @@ def add_feedback(content, rating, recipient, author, time, lunch):
 
 
 def add_university(university):
-    u = University.objects.get_or_create(domain=university)
+    u = University.objects.get_or_create(domain=university)[0]
     return u
 
 
 def add_time(time, day):
     t = TimeInterval.objects.get_or_create(time=time,
-                                           day=day)
+                                           day=day)[0]
     return t
 
 
 def add_notification(user1, user2, accepted1, accepted2, available):
     n = Notification.objects.get_or_create(userOne=user1, userTwo=user2,
-                                           acceptedOne=accepted1, acceptedTwo=accepted2, available=available)
+                                           acceptedOne=accepted1, acceptedTwo=accepted2, available=available)[0]
     return n
 
 
 def add_interest(name):
-    i = Interest.objects.get_or_create(name=name)
+    i = Interest.objects.get_or_create(name=name)[0]
     return i
 
 
 def add_lunch(user1, user2, date):
-    l = Lunch.objects.get_or_create(userOne=user1, userTwo=user2, date=date)
+    l = Lunch.objects.get_or_create(userOne=user1, userTwo=user2, date=date)[0]
     return l
 
 
@@ -87,16 +87,17 @@ def populate():
     # User profiles
     Omar = add_user_profile(om, 'Omar Tufail', 'Blah@blah.co.uk',
                             'about me', 'profile_images/omar.jpg')
-    Omar.interests.add(going_out, reading, football)
-    Omar.university.add(glasgow)
+
+    Omar.interests.add(going_out, football, reading)
+    Omar.university = glasgow
     Omar.availability.add(sat13, fri14)
     Omar.save()
 
-    Justas = add_user_profile(ju, 'Justas Bikulcius', 'Blah2@blah.co.uk'
+    Justas = add_user_profile(ju, 'Justas Bikulcius', 'Blah2@blah.co.uk',
                                                            'about me', 'profile_images/justas.jpg')
     Justas.interests.add(going_out)
     Justas.interests.add(swimming)
-    Justas.university.add(glasgow)
+    Justas.university = glasgow
     Justas.availability.add(sat13)
     Justas.availability.add(wed15)
     Justas.save()
@@ -107,7 +108,7 @@ def populate():
     Amy.interests.add(swimming)
     Amy.availability.add(wed15)
     Amy.availability.add(thu16)
-    Amy.university.add(glasgow)
+    Amy.university = glasgow
     Amy.save()
 
 
