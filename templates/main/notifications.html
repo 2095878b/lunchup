@@ -69,10 +69,10 @@
               {% for match in matches %}
                 <span href="#" class="list-group-item" style="padding:15px;">
                 <img src="../../static/images/profile_pics/10_m.jpg" width="40" class="img-circle" style="float:left; margin-right:10px;" />
-                {% for timeint in notif.available.all %}
+                {% for timeint in match.available.all %}
                     {{ timeint.time }}:00-{{ timeint.time|add:1 }}:00 on {{ timeint.day }}s&nbsp;&nbsp;
                 {% endfor %}<br />&mdash;
-                {% if notif.userOne == userprofile %}
+                {% if match.userOne.id == userprofile.id %}
                     <a href="/profile/{{ match.userTwo.user.id }}">{{ match.userTwo.fullName }}</a>
                 {% else %}
                     <a href="/profile/{{ match.userOne.user.id }}">{{ match.userOne.fullName }}</a>
@@ -92,6 +92,15 @@
 $(document).ready(function() {
     $.ajaxSetup({
         data: {csrfmiddlewaretoken: '{{ csrf_token }}'}
+    });
+    $(".btn-xs").click(function(){
+        var elem = $(this).parent();
+        var info = $(this).attr('id');
+        var notifid = info.substr(0, info.length - 1);
+        var accept = info.substr(info.length - 1, 1);
+        $.post('/accept_or_decline/', {"notifid":notifid, "accept":accept}).done(function(data){
+            elem.remove();
+        });
     });
     // TODO: Change to on/delegate so new elements can be removed as well
     $(".btn-success, .btn-danger").click(function(){

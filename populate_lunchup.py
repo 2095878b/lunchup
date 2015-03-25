@@ -16,9 +16,9 @@ def add_user(username, email, password):
         u = User.objects.create_user(username, email, password)
     return u
 
-def add_user_profile(user, fullname, email, about, interests, picture):
+def add_user_profile(user, fullname, email, about, interests):
     p = UserProfile.objects.get_or_create(user=user, fullName=fullname,
-                                          publicEmail=email, about=about, interests=interests, picture=picture)[0]
+                                          publicEmail=email, about=about, interests=interests)[0]
     return p
 
 
@@ -41,7 +41,7 @@ def add_time(time, day):
 
 def add_notification(user1, user2, accepted1, accepted2):
     n = Notification.objects.get_or_create(userOne=user1, userTwo=user2,
-                                           acceptedOne=accepted1, acceptedTwo=accepted2)[0]
+                                           acceptedOne=accepted1, acceptedTwo=accepted2, picture=None)[0]
     return n
 
 
@@ -80,29 +80,28 @@ def populate():
     glasgow = add_university(university='Glasgow University')
 
     # Users
-    om = add_user('omar', '2098877q@student.gla.ac.uk', 'notgonnaguess')
+    om = add_user('omar', '2098877q@student.gla.ac.uk', 'root')
     om.save()
-    ju = add_user('eust', '2095666e@student.gla.ac.uk', 'notgonnaguessrly')
+    ju = add_user('eust', '2095666e@student.gla.ac.uk', 'root')
     ju.save()
-    am = add_user('amyx', '2195152a@student.gla.ac.uk', 'ahaha')
+    am = add_user('amy', '2195152a@student.gla.ac.uk', 'root')
     am.save()
     # User profiles
     Omar = add_user_profile(om, 'Omar Tufail', 'Blah@blah.co.uk',
-                            'about me', 'Going out, playing foodball, reading.', 'profile_images/omar.jpg')
+                            'about me', 'Going out, playing foodball, reading.')
 
     Omar.university = glasgow
     Omar.availability.add(sat13, fri14)
     Omar.save()
 
     Justas = add_user_profile(ju, 'Justas Bikulcius', 'Blah2@blah.co.uk',
-                                                           'about me', 'Attending lectures, not doing drugs.', 'profile_images/justas.jpg')
+                                                           'about me', 'Attending lectures, not doing drugs.')
     Justas.university = glasgow
     Justas.availability.add(sat13)
     Justas.availability.add(wed15)
     Justas.save()
 
-    Amy = add_user_profile(am, 'Amy Rose', 'Blah3@blah.co.uk', 'about me', 'Listening to music and dancing.',
-                           'profile_images/amy.jpg')
+    Amy = add_user_profile(am, 'Amy Rose', 'Blah3@blah.co.uk', 'about me', 'Listening to music and dancing.')
 
     Amy.availability.add(wed15)
     Amy.availability.add(thu16)

@@ -104,7 +104,7 @@
                         {% if feedback %}
                             {% for entry in feedback %}
                             <span href="#" class="list-group-item" style="padding:15px; border:0px;">
-                                {% if entry.author.picture.url|image_exists %}
+                                {% if entry.author.picture%}
                                 <img src="{{ entry.author.picture.url }}" width="40" class="img-circle" style="float:left; margin-right:10px;"/>
                                 {% else %}
                                 <img src="../../media/profile_images/leif.jpeg" width="40" class="img-circle" style="float:left; margin-right:10px;"/>

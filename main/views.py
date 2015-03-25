@@ -7,25 +7,38 @@ from main.models import *
 
 
 def magic(request):
+    data = ""
     try:
         Notification.objects.all().delete()
         allprofiles = UserProfile.objects.all()
         apL = len(allprofiles)
-        for user1 in range(0, apL/2 + 1):
-            for user2 in range(apL - 1, apL/2 - 1, -1):
+        for user1 in range(0, apL):
+            for user2 in range(user1 + 1, apL):
+                data += 'CMP ID' + str(allprofiles[user1].id) + '(' + allprofiles[user1].user.username + ')' + \
+                    ' ID'+str(allprofiles[user2].id)+'('+allprofiles[user2].user.username+')<br>'
                 if user1 != user2:
-                    if allprofiles[user1].university == allprofiles[user2].university:
-                        for t in allprofiles[user1].availability.all():
-                            if t in allprofiles[user2].availability.all():
-                                n = Notification.objects.get_or_create(userOne=allprofiles[user1],
-                                                                       userTwo=allprofiles[user2],
-                                                                       acceptedOne=False,
-                                                                       acceptedTwo=False)[0]
-                                n.available.add(t)
-                                n.save()
-    except:
-        return HttpResponse("You have to RUB IT three times.")
-    return HttpResponse('The genie was let out of the lamp.')
+                    #if allprofiles[user1].university == allprofiles[user2].university:
+                    for t in allprofiles[user1].availability.all():
+                        data += str(t.day) + str(t.time) + ' && '
+                    data += '<br>'
+                    for t in allprofiles[user2].availability.all():
+                        data += str(t.day) + ' at ' + str(t.time) + ' && '
+                    data += '<br>'
+                    for t in allprofiles[user1].availability.all():
+                        if t in allprofiles[user2].availability.all():
+                            data += 'MATCH! ' + str(t.day) + ' at ' + str(t.time) + '<br><br>'
+                            n = Notification.objects.get_or_create(userOne=allprofiles[user1],
+                                                                   userTwo=allprofiles[user2],
+                                                                   acceptedOne=False,
+                                                                   acceptedTwo=False)[0]
+                            n.available.add(t)
+                            n.save()
+                else:
+                    data += ' SKIP<br>'
+    except Exception as inst:
+        print inst
+        return HttpResponse("You have to RUB IT three times." + data)
+    return HttpResponse('The genie was let out of the lamp.<br>' + data)
 
 @ajax
 @login_required
