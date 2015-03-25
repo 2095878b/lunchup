@@ -123,7 +123,7 @@ def upload_picture(request):
                     pass
         except:
             pass
-        return redirect('/')
+        return redirect('/profile')
     else:
         return render(request, 'registration/upload_picture.html')
 
