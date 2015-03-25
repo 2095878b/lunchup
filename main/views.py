@@ -11,6 +11,8 @@ def edit_profile(request):
         user_profile = UserProfile.objects.get(user=request.user)
         if request.POST['name'] == "about":
             user_profile.about = request.POST['value']
+        if request.POST['name'] == "interests":
+            user_profile.interests = request.POST['value']
         if request.POST['name'] == "fullName":
             user_profile.fullName = request.POST['value']
         if request.POST['name'] == "publicEmail":

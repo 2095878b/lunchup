@@ -88,14 +88,13 @@
                                                                                                class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;Interests</span>
                         <br/><br/>
                         <ul>
-                            <a href="#" id="interests" data-type="select2" data-pk="1" data-title="Enter tags"
-                               class="editable editable-click editable-open" data-original-title="" title="">html,
-                                javascript</a>
-                            <li>Sports</li>
-                            <li>Psychology</li>
-                            <li>Movies</li>
-                            <li>Eating out</li>
-                            <li>Traveling, discovering new places</li>
+                                {% if myprofile != None %}
+                                    <a href="#" id="interests" data-type="textarea" data-pk="{{ profile.id }}"
+                                       data-url="/edit_profile/"
+                                       data-title="List your interests">{{ profile.interests }}</a>
+                                {% else %}
+                                    {{ profile.interests }}
+                                {% endif %}
                         </ul>
                         <hr/>
 
@@ -117,22 +116,6 @@
                                 src="../../static/images/profile_pics/10_m.jpg" width="40" class="img-circle"
                                 style="float:left; margin-right:10px;"/>&ldquo;Lorem ipsum dolor sit amet, vim omnesque delicata in, dicat cotidieque ne sed. Lorem tollit denique usu ei, animal reformidans vim at.&rdquo;<br/>&mdash;<a
                                 href="#">Harry Starry</a></span>
-
-
-                        <div>
-                            <nav>
-                                <ul class="pagination">
-                                    <li class="disabled"><a href="#" aria-label="Previous"><span
-                                            aria-hidden="true">&laquo;</span></a></li>
-                                    <li class="active"><a href="#">1 <span class="sr-only">(current)</span></a></li>
-                                    <li><a href="#">2 <span class="sr-only">(current)</span></a></li>
-                                    <li><a href="#">3 <span class="sr-only">(current)</span></a></li>
-                                    <li><a href="#">4 <span class="sr-only">(current)</span></a></li>
-                                    <li><a href="#">5 <span class="sr-only">(current)</span></a></li>
-                                    <li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
-                                </ul>
-                            </nav>
-                        </div>
                         {% if myprofile == None %}
                             <hr/>
 
@@ -187,29 +170,9 @@
                         if (response.status == 'error') return response.msg;
                     }
                 });
-                // Interests
                 $('#interests').editable({
-                    inputclass: 'input-large',
-                    select2: {
-                        tags: ['html', 'javascript', 'css', 'ajax'],
-                        tokenSeparators: [",", " "],
-                        ajax: {
-                            multiple: true,
-                            url: "/get_interests/",
-                            dataType: "json",
-                            data: function (term) {
-                                alert(term);
-                                return {
-                                    term: term
-                                };
-                            },
-                            results: function (data) {
-                                alert(data);
-                                return {
-                                    results: data
-                                };
-                            }
-                        }
+                    success: function (response, newValue) {
+                        if (response.status == 'error') return response.msg;
                     }
                 });
             });
