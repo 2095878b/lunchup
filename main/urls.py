@@ -15,4 +15,5 @@ urlpatterns = patterns('',
     url(r'^add_avail/$', views.add_avail, name='add_avail'),
     url(r'^rm_avail/$', views.rm_avail, name='rm_avail'),
     url(r'^accept_or_decline/$', views.accept_or_decline, name='accept_or_decline'),
+    url(r'^magic/$', views.magic, name='magic'),
 )
