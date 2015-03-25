@@ -96,7 +96,7 @@ TEMPLATE_DIRS = (
 REGISTRATION_OPEN = True
 ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_AUTO_LOGIN = True
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/how_it_works/'
 LOGIN_URL = '/accounts/login/'
 
 TEMPLATE_CONTEXT_PROCESSORS = ('django.core.context_processors.request',
