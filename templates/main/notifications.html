@@ -63,12 +63,26 @@
         </div><!--/.col-xs-12.col-sm-9-->
 
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
-          <h3><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> <span class="font_styled">Feedback</span></h3><span class="font_styled">What people are saying about you.</span><br /><br />
+          <h3><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> <span class="font_styled">Matches</span></h3><span class="font_styled">People you're matched with end up here.</span><br /><br />
           <div class="list-group">
-            <span href="#" class="list-group-item" style="padding:15px;"><img src="../../static/images/profile_pics/10_m.jpg" width="40" class="img-circle" style="float:left; margin-right:10px;" />&ldquo;Lorem ipsum dolor sit amet, vim omnesque delicata in, dicat cotidieque ne sed. Lorem tollit denique usu ei, animal reformidans vim at.&rdquo;<br />&mdash;<a href="#">Harry Starry</a></span>
-            <span href="#" class="list-group-item" style="padding:15px;"><img src="../../static/images/profile_pics/17_f.jpg" width="40" class="img-circle" style="float:left; margin-right:10px;" />&ldquo;Lorem ipsum dolor sit amet, vim omnesque delicata in, dicat cotidieque ne sed.&rdquo;<br />&mdash;<a href="#">Lauren Fauren</a></span>
-            <span href="#" class="list-group-item" style="padding:15px;"><img src="../../static/images/profile_pics/05_m.jpg" width="40" class="img-circle" style="float:left; margin-right:10px;" />&ldquo;Tollit denique usu ei, animal reformidans vim at.&rdquo;<br />&mdash;<a href="#">Joe Styyr</a></span>
-            <span href="#" class="list-group-item" style="padding:15px;"><img src="../../static/images/profile_pics/04_m.jpg" width="40" class="img-circle" style="float:left; margin-right:10px;" />&ldquo;Omnesque delicata in, dicat cotidieque ne sed denique usu ei.&rdquo;<br />&mdash;<a href="#">Dominic Fresde</a></span>
+          {% if matches %}
+              {% for match in matches %}
+                <span href="#" class="list-group-item" style="padding:15px;">
+                <img src="../../static/images/profile_pics/10_m.jpg" width="40" class="img-circle" style="float:left; margin-right:10px;" />
+                {% for timeint in notif.available.all %}
+                    {{ timeint.time }}:00-{{ timeint.time|add:1 }}:00 on {{ timeint.day }}s&nbsp;&nbsp;
+                {% endfor %}<br />&mdash;
+                {% if notif.userOne == userprofile %}
+                    <a href="/profile/{{ match.userTwo.user.id }}">{{ match.userTwo.fullName }}</a>
+                {% else %}
+                    <a href="/profile/{{ match.userOne.user.id }}">{{ match.userOne.fullName }}</a>
+                {% endif %}
+                <button id="{{ match.id }}n" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+                </span>
+              {% endfor %}
+          {% else %}
+            <h3>No matches yet.</h3>
+          {% endif %}
           </div>
         </div><!--/.sidebar-offcanvas-->
       </div><!--/row-->

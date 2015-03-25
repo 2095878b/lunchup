@@ -32,15 +32,8 @@ class UserProfile(models.Model):
     university = models.ForeignKey(University, blank=True, null=True)
     about = models.TextField(max_length=6000)
     picture = models.ImageField(upload_to='profile_images', blank=True)
+    # ignores = models.ManyToManyField(UserProfile)
 
-
-class Lunch(models.Model):
-    userOne = models.ForeignKey(UserProfile, related_name='uone')
-    userTwo = models.ForeignKey(UserProfile, related_name='utwo')
-    date = models.DateTimeField()
-
-    class Meta:
-        verbose_name_plural = "lunches"
 
 class Feedback(models.Model):
     content = models.CharField(max_length=6000)

@@ -4,6 +4,7 @@ from django_ajax.decorators import ajax
 from django.db.models import Q
 from main.models import *
 
+
 @ajax
 @login_required
 def edit_profile(request):
@@ -107,6 +108,8 @@ def notifications(request):
         context_dict['userprofile'] = UserProfile.objects.get(user=request.user)
         context_dict['notifications'] = \
             Notification.objects.filter((Q(userOne=context_dict['userprofile']) & Q(acceptedOne=False)) | (Q(userTwo=context_dict['userprofile']) & Q(acceptedTwo=False)))
+        context_dict['matches'] = \
+            Notification.objects.filter((Q(acceptedOne=True) & Q(acceptedTwo=True)) & (Q(userOne=context_dict['userprofile']) | Q(userTwo=context_dict['userprofile'])))
     except:
         pass
     return render(request, 'main/notifications.html', context_dict)
