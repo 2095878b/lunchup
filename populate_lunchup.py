@@ -69,14 +69,6 @@ def populate():
     # Add unis
     glasgow = add_university(university='Glasgow University')
 
-    # Add notifications
-    omju = add_notification(om, ju, True,True)
-    omju.available.add(sat13)
-    amom = add_notification(om, am,True,True)
-    amom.available.add(fri14)
-    juam = add_notification(ju, am, True, True)
-    juam.available.add(wed15)
-
     # Users
     om = add_user('omar', '2098877q@student.gla.ac.uk', 'root')
     om.save()
@@ -86,7 +78,7 @@ def populate():
     am.save()
     ra = add_user('vj', '2080123v@student.gla.ac.uk', 'root')
     ra.save()
-    bl = add_user_profile('bliatch', '2078910A@student.gla.ac.uk', 'root')
+    bl = add_user('bliatch', '2078910A@student.gla.ac.uk', 'root')
     bl.save()
     zo = add_user('zoes', '2065610s@student.gla.ac.uk', 'root'  )
     zo.save()
@@ -155,6 +147,7 @@ def populate():
     add_feedback('Had a great lunch, thanks. Hope we can grab luch again.', Zoe, Raj)
     add_feedback('Finally found some who loves games as much as me', Raj, Zoe)
     add_feedback('Will be seeing you again for dinner I hope', Blair, Amy)
+
 # Start execution here!
 if __name__ == '__main__':
     print "Starting LunchUp population script..."
