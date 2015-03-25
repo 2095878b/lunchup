@@ -40,8 +40,8 @@ def magic(request):
         return HttpResponse("You have to RUB IT three times." + data)
     return HttpResponse('The genie was let out of the lamp.<br>' + data)
 
-@ajax
 @login_required
+@ajax
 def edit_profile(request):
     try:
         user_profile = UserProfile.objects.get(user=request.user)
@@ -57,6 +57,7 @@ def edit_profile(request):
     except:
         return {'status': 'error', 'msg': 'Unable to save field.'}
 
+@login_required
 @ajax
 def accept_or_decline(request):
     try:
@@ -74,11 +75,13 @@ def accept_or_decline(request):
     except:
         return {'status': 'error', 'msg': 'Could not accept/decline.'}
 
+@login_required
 @ajax
 def get_avail(request):
     up = UserProfile.objects.get(user=request.user)
     return up.availability.all()
 
+@login_required
 @ajax
 def add_avail(request):
     time = int(request.POST['time'])
@@ -94,6 +97,7 @@ def add_avail(request):
     except:
         return {'status':'error', 'msg':'Something went wrong. Please relog.'}
 
+@login_required
 @ajax
 def rm_avail(request):
     time = int(request.POST['time'])
@@ -132,7 +136,7 @@ def splash(request):
     return render(request, 'splash.html')
 
 # For now this serves as our splash page
-#@login_required
+@login_required
 def how_it_works(request):
     return render(request, 'main/how_it_works.html')
 
@@ -149,10 +153,12 @@ def notifications(request):
         pass
     return render(request, 'main/notifications.html', context_dict)
 
+@login_required
 def about(request):
     return render(request, 'main/about.html')
 
 # TODO: If profile is empty - it does not participate in 'matchmaking'
+@login_required
 def profile(request, user_id=None):
     if request.method == "POST" and request.POST['recipient'] != request.user.id:
         try:
@@ -180,6 +186,7 @@ def profile(request, user_id=None):
     return render(request, 'registration/profile.html', context_dict)
 
 # Timetabling
+@login_required
 def avail(request):
     context_dict = {}
     try:

@@ -4,6 +4,7 @@
 	<title>Bootstrap In Practice - Landing Page Example</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Bootstrap -->
+    {% load static %}
 	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
 	<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
 
@@ -13,7 +14,7 @@
 
 		/* http://css-tricks.com/perfect-full-page-background-image/ */
 		html {
-			background: url(lunchup_faces_bg_org_jpg.jpg) no-repeat center center fixed; 
+			background: url({% static 'images/lunchup_faces_bg_org_jpg.jpg' %}) no-repeat center center fixed;
 			-webkit-background-size: cover;
 			-moz-background-size: cover;
 			-o-background-size: cover;
@@ -51,7 +52,7 @@
 		<div class="row">
 
 			<div class="col-md-6 col-md-offset-3 text-center">
-				<img src="lunch_up_logo.png" />
+				<img src="{% static 'images/lunchup_faces_bg_org_jpg.jpg' %}lunch_up_logo.png" />
 				<br /><br />
 			</div>
 
@@ -63,9 +64,9 @@
 
 				<form class="margin-base-vertical">
 					
-						<a href="/accounts/register/"><button type="submit" class="btn btn-success btn-lg">Register</button></a>
+						<a href="{% url 'registration_register' %}"><button type="submit" class="btn btn-success btn-lg">Register</button></a>
 						<br />
-						<a href="/accounts/login/">Login</a>
+						<a href="{% url 'auth_login' %}">Login</a>
 					
 				</form>
 
