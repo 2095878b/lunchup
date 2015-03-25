@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 
 {% load staticfiles %}
+{% load image_extras %}
 
 {% block title %} Profile {% endblock %}
 
@@ -26,8 +27,7 @@
                             <a href="{% url 'upload_picture' %}">
                         {% endif %}
                         {% if profile.picture %}
-                            <img src="../../static/images/ot.jpg" width="190" class="img-circle">
-                            <!--  for now <img src="{{ profile.picture.url }}">!-->
+                            <img src="{{ profile.picture.url }}" width="190" class="img-circle">
                         {% else %}
                             <img src="{% static 'images/ot.jpg' %}" width="190" class="img-circle">
                         {% endif %}
@@ -103,9 +103,13 @@
                         <br/><br/>
                         {% if feedback %}
                             {% for entry in feedback %}
-                            <span href="#" class="list-group-item" style="padding:15px; border:0px;"><img
-                                src="../../static/images/profile_pics/10_m.jpg" width="40" class="img-circle"
-                                style="float:left; margin-right:10px;"/>&ldquo;{{ entry.content }}&rdquo;<br/>&mdash;<a
+                            <span href="#" class="list-group-item" style="padding:15px; border:0px;">
+                                {% if entry.author.picture.url|image_exists %}
+                                <img src="{{ entry.author.picture.url }}" width="40" class="img-circle" style="float:left; margin-right:10px;"/>
+                                {% else %}
+                                <img src="../../media/profile_images/leif.jpeg" width="40" class="img-circle" style="float:left; margin-right:10px;"/>
+                                {% endif %}
+                                &ldquo;{{ entry.content }}&rdquo;<br/>&mdash;<a
                                 href="/profile/{{ entry.author.user.id }}">{{ entry.author.fullName }}</a></span>
                             <hr/>
                             {% endfor %}
