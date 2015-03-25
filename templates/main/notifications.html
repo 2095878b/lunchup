@@ -17,45 +17,46 @@
             <p style="font-size:16px;" class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;See who you've been matched up with, view their profiles and arrange to lunch up!</p>
           </div>
           <div class="row" style="padding:15px;">
-
-              <div class="col-md-12" style="border: 2px solid; border-radius: 25px; border-color: #dedede; margin-bottom:15px; padding:10px; background-color:#ffffff;">
-                <div class="col-md-1" style="margin:9px 30px 0 0;"><img src="../../static/images/profile_pics/16_f.jpg" width="90" class="img-circle" /></div>
-                <div class="col-md-9">
-                  <span style="font-size:26px; font-weight:bold;" class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;Saul Bellow</span><br />
-                  <ul><li>Available: 2pm, 18th March 2015</li><li>Interests: Sports, Psychology, Movies, Eating out, discovering new places.</li><li>Rating: &#9733;&#9733;&#9733;&#9734;&#9734;</li></ul>
-                </div>
-                <div class="col-md-1" style="margin:9px 30px 0 0;">
-                  <button type="button" class="btn btn-success">View <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
-                </div>
-              </div>
-
-              <div class="col-md-12" style="border: 2px solid; border-radius: 25px; border-color: #dedede; margin-bottom:15px; padding:10px; background-color:#ffffff;">
-                <div class="col-md-1" style="margin:9px 30px 0 0;"><img src="../../static/images/profile_pics/07_m.jpg" width="90" class="img-circle" /></div>
-                <div class="col-md-9">
-                  <span style="font-size:26px; font-weight:bold;" class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;Carlo Aves</span><br />
-                  <ul><li>Available: 2pm, 18th March 2015</li><li>Interests: Animal care (volunteering at an animal shelter).</li><li>Rating: &#9733;&#9733;&#9733;&#9733;&#9734;</li></ul>
-                </div>
-                <div class="col-md-1" style="margin:9px 30px 0 0;">
-                  <button type="button" class="btn btn-success">View <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
-                </div>
-              </div>
-
-              <div class="col-md-12" style="border: 2px solid; border-radius: 25px; border-color: #dedede; margin-bottom:15px; padding:10px; background-color:#ffffff;">
-                <div class="col-md-1" style="margin:9px 30px 0 0;"><img src="../../static/images/profile_pics/12_f.jpg" width="90" class="img-circle" /></div>
-                <div class="col-md-9">
-                  <span style="font-size:26px; font-weight:bold;" class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;Sadia Malik</span><br />
-                  <ul><li>Available: 2pm, 18th March 2015</li><li>Interests: Recycling, Organic farming, Composting, Landscape gardening.</li><li>Rating: &#9733;&#9733;&#9733;&#9733;&#9733;</li></ul>
-                </div>
-                <div class="col-md-1" style="margin:9px 30px 0 0;">
-                  <button type="button" class="btn btn-success">View <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button>
-                </div>
-              </div>
-
-
-
-
-
-              <div>
+          {% if notifications %}
+            {% for notif in notifications %}
+                {% if notif.userOne == userprofile %}
+                  <div class="col-md-12" style="border: 2px solid; border-radius: 25px; border-color: #dedede; margin-bottom:15px; padding:10px; background-color:#ffffff;">
+                    <div class="col-md-1" style="margin:9px 30px 0 0;"><img src="../../static/images/profile_pics/16_f.jpg" width="90" class="img-circle" /></div>
+                    <div class="col-md-9">
+                      <span style="font-size:26px; font-weight:bold;" class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;{{ notif.userTwo.fullName }}</span><br />
+                      <ul><li>Available:
+                          {% for timeint in notif.available.all %}
+                            {{ timeint.time }}:00-{{ timeint.time|add:1 }}:00 on {{ timeint.day }}s&nbsp;&nbsp;
+                          {% endfor %}
+                      </li><li>Interests: Sports, Psychology, Movies, Eating out, discovering new places.</li><li>Rating: &#9733;&#9733;&#9733;&#9734;&#9734;</li></ul>
+                    </div>
+                    <div class="col-md-1" style="margin:9px 30px 0 0;">
+                        <!-- userTwo.user.id  -->
+                      <a href="/profile/{{ notif.userTwo.user.id }}"><button type="button" class="btn btn-success">View <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button></a>
+                    </div>
+                  </div>
+                {% else %}
+                  <div class="col-md-12" style="border: 2px solid; border-radius: 25px; border-color: #dedede; margin-bottom:15px; padding:10px; background-color:#ffffff;">
+                    <div class="col-md-1" style="margin:9px 30px 0 0;"><img src="../../static/images/profile_pics/16_f.jpg" width="90" class="img-circle" /></div>
+                    <div class="col-md-9">
+                      <span style="font-size:26px; font-weight:bold;" class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;{{ notif.userOne.fullName }}</span><br />
+                      <ul><li>Available:
+                          {% for timeint in notif.available.all %}
+                            {{ timeint.time }}:00-{{ timeint.time|add:1 }}:00 on {{ timeint.day }}s&nbsp;&nbsp;
+                          {% endfor %}
+                      </li><li>Interests: Sports, Psychology, Movies, Eating out, discovering new places.</li><li>Rating: &#9733;&#9733;&#9733;&#9734;&#9734;</li></ul>
+                    </div>
+                    <div class="col-md-1" style="margin:9px 30px 0 0;">
+                        <!-- userOne.user.id  -->
+                      <a href="/profile/{{ notif.userOne.user.id }}"><button type="button" class="btn btn-success">View <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button></a>
+                    </div>
+                  </div>
+                {% endif %}
+            {% endfor %}
+          {% else %}
+          <h3>No notifications yet.</h3>
+          {% endif %}
+              <!--<div>
                 <nav>
               <ul class="pagination">
                 <li class="disabled"><a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
@@ -67,7 +68,7 @@
                 <li><a href="#" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
               </ul>
             </nav>
-          </div>
+          </div>-->
 
           </div><!--/row-->
         </div><!--/.col-xs-12.col-sm-9-->

@@ -56,16 +56,9 @@ class Feedback(models.Model):
     class Meta:
         verbose_name_plural = "feedback"
 
-#class Message(models.Model):
-#    content = models.CharField(max_length=6000)
-#    author = models.ForeignKey(User, related_name='message_author')
-#    recipient = models.ForeignKey(User, related_name='message_recipient')
-#    time = models.DateTimeField()
-    # TODO: excluded boolean isMessageRead, implement later
-
 class Notification(models.Model):
-    userOne = models.ForeignKey(User, related_name='userone')
-    userTwo = models.ForeignKey(User, related_name='usertwo')
+    userOne = models.ForeignKey(UserProfile, related_name='userone')
+    userTwo = models.ForeignKey(UserProfile, related_name='usertwo')
     acceptedOne = models.BooleanField(default=False)
     acceptedTwo = models.BooleanField(default=False)
-    available = models.DateTimeField()
+    available = models.ManyToManyField(TimeInterval)

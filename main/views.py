@@ -91,13 +91,19 @@ def how_it_works(request):
 @login_required
 def notifications(request):
     context_dict = {}
+    try:
+        context_dict['userprofile'] = UserProfile.objects.get(user=request.user)
+        context_dict['notifications'] = \
+            Notification.objects.filter(userOne=context_dict['userprofile']) | Notification.objects.filter(userTwo=context_dict['userprofile'])
+    except:
+        pass
     return render(request, 'main/notifications.html', context_dict)
 
 def about(request):
     return render(request, 'main/about.html')
 
 # TODO: If profile is empty - it does not participate in 'matchmaking'
-def profile(request, user_id = None):
+def profile(request, user_id=None):
     if user_id is not None:
         context_dict = {'user': User.objects.get(id=user_id)}
     else:

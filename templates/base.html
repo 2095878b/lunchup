@@ -53,14 +53,14 @@
                 {% url 'avail' as url %}
                 <li{% if request.path == url %} class="active" {% endif %}><a href="{{ url }}"><span class="glyphicon glyphicon-time" aria-hidden="true"></span>&nbsp;&nbsp;Availablity</a></li>
                 {% url 'notifications' as url %}
-                <li{% if request.path == url %} class="active" {% endif %}><a href="{{ url }}"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>&nbsp;&nbsp;Notifications <span class="badge">3</span></a></li>
+                <li{% if request.path == url %} class="active" {% endif %}><a href="{{ url }}"><span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>&nbsp;&nbsp;Notifications <!--<span class="badge">3</span>--></a></li>
                 {% url 'myprofile' as url %}
                 <li{% if request.path == url %} class="active" {% endif %}><a href="{{ url }}"><span class="glyphicon glyphicon-user" aria-hidden="true"></span>&nbsp;&nbsp;Profile</a></li>
                 {% url 'auth_password_change' as url %}
                 <li{% if request.path == url %} class="active" {% endif %}><a href="{{ url }}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;&nbsp;Settings</a></li>
             {% else %}
               <li><a href="{% url 'registration_register' %}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;&nbsp;Register</a></li>
-              <li><a href="{% url 'auth_password_change' %}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;&nbsp;Login</a></li>
+              <li><a href="{% url 'auth_login' %}"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>&nbsp;&nbsp;Login</a></li>
             {% endif %}
           </ul>
           {% if user.is_authenticated %}

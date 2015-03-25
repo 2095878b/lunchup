@@ -40,9 +40,9 @@ def add_time(time, day):
     return t
 
 
-def add_notification(user1, user2, accepted1, accepted2, available):
+def add_notification(user1, user2, accepted1, accepted2):
     n = Notification.objects.get_or_create(userOne=user1, userTwo=user2,
-                                           acceptedOne=accepted1, acceptedTwo=accepted2, available=available)[0]
+                                           acceptedOne=accepted1, acceptedTwo=accepted2)[0]
     return n
 
 
@@ -55,7 +55,19 @@ def add_lunch(user1, user2, date):
     l = Lunch.objects.get_or_create(userOne=user1, userTwo=user2, date=date)[0]
     return l
 
-
+# O(n^2), there's room for improvement
+def make_matches():
+    allprofiles = UserProfile.objects.all()
+    apL = len(allprofiles)
+    for user1 in range(0, apL/2 + 1):
+        for user2 in range(apL - 1, apL/2 - 1, -1):
+            if user1 != user2:
+                if allprofiles[user1].university == allprofiles[user2].university:
+                    for t in allprofiles[user1].availability.all():
+                        if t in allprofiles[user2].availability.all():
+                            n = add_notification(allprofiles[user1], allprofiles[user2], False, False)
+                            n.available.add(t)
+                            n.save()
 def populate():
     # Populate time intervals
     days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
@@ -111,7 +123,7 @@ def populate():
     Amy.university = glasgow
     Amy.save()
 
-
+    make_matches()
     # Feedback
     #forOmar = add_feedback('it was good', '4', Omar, Amy, time, lunch)
 # Start execution here!
