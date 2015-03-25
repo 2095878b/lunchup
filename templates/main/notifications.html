@@ -62,7 +62,6 @@
           </div><!--/row-->
         </div><!--/.col-xs-12.col-sm-9-->
 
-
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
           <h3><span class="glyphicon glyphicon-comment" aria-hidden="true"></span> <span class="font_styled">Feedback</span></h3><span class="font_styled">What people are saying about you.</span><br /><br />
           <div class="list-group">
@@ -75,5 +74,21 @@
       </div><!--/row-->
 
       <hr>
-
+<script>
+$(document).ready(function() {
+    $.ajaxSetup({
+        data: {csrfmiddlewaretoken: '{{ csrf_token }}'}
+    });
+    // TODO: Change to on/delegate so new elements can be removed as well
+    $(".btn-success, .btn-danger").click(function(){
+        var elem = $(this).parent();
+        var info = $(this).attr('id');
+        var notifid = info.substr(0, info.length - 1);
+        var accept = info.substr(info.length - 1, 1);
+        $.post('/accept_or_decline/', {"notifid":notifid, "accept":accept}).done(function(data){
+            elem.parent().remove();
+        });
+    });
+});
+</script>
 {% endblock %}

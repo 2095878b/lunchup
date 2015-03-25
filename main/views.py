@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django_ajax.decorators import ajax
-from main.forms import UserProfileForm
+from django.db.models import Q
 from main.models import *
 
 @ajax
@@ -28,6 +28,7 @@ def accept_or_decline(request):
                 notif.acceptedOne = True
             if notif.userTwo.user == request.user:
                 notif.acceptedTwo = True
+            notif.save()
         else:
             # Security measure
             if notif.userOne.user == request.user or notif.userTwo.user == request.user:
@@ -103,7 +104,7 @@ def notifications(request):
     try:
         context_dict['userprofile'] = UserProfile.objects.get(user=request.user)
         context_dict['notifications'] = \
-            Notification.objects.filter(userOne=context_dict['userprofile']) | Notification.objects.filter(userTwo=context_dict['userprofile'])
+            Notification.objects.filter((Q(userOne=context_dict['userprofile']) & Q(acceptedOne=False)) | (Q(userTwo=context_dict['userprofile']) & Q(acceptedTwo=False)))
     except:
         pass
     return render(request, 'main/notifications.html', context_dict)
