@@ -119,12 +119,21 @@ def about(request):
 
 # TODO: If profile is empty - it does not participate in 'matchmaking'
 def profile(request, user_id=None):
+    if request.method == "POST" and request.POST['recipient'] != request.user.id:
+        try:
+            feedback = Feedback(content=request.POST['content'],
+                                recipient=UserProfile.objects.get(id=request.POST['recipient']),
+                                author=UserProfile.objects.get(user=request.user))
+            feedback.save()
+        except:
+            pass
     if user_id is not None:
         context_dict = {'user': User.objects.get(id=user_id)}
     else:
         context_dict = {'user': User.objects.get(id=request.user.id)}
     try:
         context_dict['profile'] = UserProfile.objects.get(user=context_dict['user'])
+        context_dict['feedback'] = Feedback.objects.filter(recipient=context_dict['profile']).all()
     except:
         context_dict['profile'] = None
 

@@ -50,10 +50,6 @@ def add_notification(user1, user2, accepted1, accepted2):
 #    return i
 
 
-def add_lunch(user1, user2, date):
-    l = Lunch.objects.get_or_create(userOne=user1, userTwo=user2, date=date)[0]
-    return l
-
 # O(n^2), there's room for improvement
 def make_matches():
     allprofiles = UserProfile.objects.all()

@@ -41,7 +41,6 @@ class Feedback(models.Model):
     author = models.ForeignKey(UserProfile, related_name='feedback_author')
     # Time when the feedback was left, not the lunch date
     #time = models.DateTimeField()
-    #lunch = models.ForeignKey(Lunch)
 
     class Meta:
         verbose_name_plural = "feedback"
