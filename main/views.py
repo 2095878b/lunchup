@@ -4,9 +4,6 @@ from django_ajax.decorators import ajax
 from main.forms import UserProfileForm
 from main.models import *
 
-
-# TODO: Major bug here. edit_profile can only save one field
-# the other fields get cleared for some reason
 @ajax
 @login_required
 def edit_profile(request):
@@ -23,8 +20,20 @@ def edit_profile(request):
         return {'status': 'error', 'msg': 'Unable to save field.'}
 
 @ajax
-def get_interests(request):
-    return Interest.objects.all()
+def accept_or_decline(request):
+    try:
+        notif = Notification.objects.get(id=request.POST['notifid'])
+        if request.POST['accept'] == 'y':
+            if notif.userOne.user == request.user:
+                notif.acceptedOne = True
+            if notif.userTwo.user == request.user:
+                notif.acceptedTwo = True
+        else:
+            # Security measure
+            if notif.userOne.user == request.user or notif.userTwo.user == request.user:
+                notif.delete()
+    except:
+        return {'status': 'error', 'msg': 'Could not accept/decline.'}
 
 @ajax
 def get_avail(request):

@@ -3,8 +3,8 @@ from django.contrib.auth.models import User
 
 # TODO: check foreign key on_delete parameter (low priority, later on)
 
-class Interest(models.Model):
-    name = models.CharField(max_length=64)
+#class Interest(models.Model):
+#    name = models.CharField(max_length=64)
 
 class University(models.Model):
     domain = models.CharField(max_length=64)
@@ -20,25 +20,23 @@ class TimeInterval(models.Model):
 
 
 class UserProfile(models.Model):
-    # TODO: Check the constraints
     user = models.OneToOneField(User)
     fullName = models.CharField(max_length=64)
     publicEmail = models.EmailField()
     availability = models.ManyToManyField(TimeInterval)
 
-    interests = models.ManyToManyField(Interest)
+    interests = models.CharField(max_length=250)
 
+    # TODO: Email to uni domain / custom save
     # Can be blank/null for now
     university = models.ForeignKey(University, blank=True, null=True)
     about = models.TextField(max_length=6000)
     picture = models.ImageField(upload_to='profile_images', blank=True)
 
-    birthday = models.DateField(blank=True, null=True)
 
 class Lunch(models.Model):
-    # TODO: Consider renaming these two
-    userOne = models.ForeignKey(User, related_name='uone')
-    userTwo = models.ForeignKey(User, related_name='utwo')
+    userOne = models.ForeignKey(UserProfile, related_name='uone')
+    userTwo = models.ForeignKey(UserProfile, related_name='utwo')
     date = models.DateTimeField()
 
     class Meta:
@@ -46,12 +44,11 @@ class Lunch(models.Model):
 
 class Feedback(models.Model):
     content = models.CharField(max_length=6000)
-    rating = models.PositiveSmallIntegerField()
-    recipient = models.ForeignKey(User, related_name='feedback_recipient')
-    author = models.ForeignKey(User, related_name='feedback_author')
+    recipient = models.ForeignKey(UserProfile, related_name='feedback_recipient')
+    author = models.ForeignKey(UserProfile, related_name='feedback_author')
     # Time when the feedback was left, not the lunch date
-    time = models.DateTimeField()
-    lunch = models.ForeignKey(Lunch)
+    #time = models.DateTimeField()
+    #lunch = models.ForeignKey(Lunch)
 
     class Meta:
         verbose_name_plural = "feedback"

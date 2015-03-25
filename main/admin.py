@@ -4,7 +4,6 @@ from main.models import *
 						
 # Register your models here.
 
-admin.site.register(Interest)
 admin.site.register(University)
 admin.site.register(UserProfile)
 admin.site.register(Lunch)

@@ -16,16 +16,15 @@ def add_user(username, email, password):
         u = User.objects.create_user(username, email, password)
     return u
 
-def add_user_profile(user, fullname, email, about, picture):
+def add_user_profile(user, fullname, email, about, interests, picture):
     p = UserProfile.objects.get_or_create(user=user, fullName=fullname,
-                                          publicEmail=email, about=about, picture=picture)[0]
+                                          publicEmail=email, about=about, interests=interests, picture=picture)[0]
     return p
 
 
-def add_feedback(content, rating, recipient, author, time, lunch):
-    f = Feedback.objects.get_or_create(content=content, rating=rating,
-                                       recipient=recipient, author=author,
-                                       time=time, lunch=lunch)[0]
+def add_feedback(content, recipient, author):
+    f = Feedback.objects.get_or_create(content=content,
+                                       recipient=recipient, author=author)[0]
     return f
 
 
@@ -46,9 +45,9 @@ def add_notification(user1, user2, accepted1, accepted2):
     return n
 
 
-def add_interest(name):
-    i = Interest.objects.get_or_create(name=name)[0]
-    return i
+#def add_interest(name):
+#    i = Interest.objects.get_or_create(name=name)[0]
+#    return i
 
 
 def add_lunch(user1, user2, date):
@@ -80,11 +79,6 @@ def populate():
     wed15 = add_time(time=13, day='Wednesday')
     thu16 = add_time(time=13, day='Thursday')
     fri14 = add_time(time=13, day='Friday')
-    # Add interests
-    football = add_interest(name='football')
-    swimming = add_interest(name='swimming')
-    going_out = add_interest(name='going out')
-    reading = add_interest(name='reading')
 
     # Add unis
     glasgow = add_university(university='Glasgow University')
@@ -98,26 +92,22 @@ def populate():
     am.save()
     # User profiles
     Omar = add_user_profile(om, 'Omar Tufail', 'Blah@blah.co.uk',
-                            'about me', 'profile_images/omar.jpg')
+                            'about me', 'Going out, playing foodball, reading.', 'profile_images/omar.jpg')
 
-    Omar.interests.add(going_out, football, reading)
     Omar.university = glasgow
     Omar.availability.add(sat13, fri14)
     Omar.save()
 
     Justas = add_user_profile(ju, 'Justas Bikulcius', 'Blah2@blah.co.uk',
-                                                           'about me', 'profile_images/justas.jpg')
-    Justas.interests.add(going_out)
-    Justas.interests.add(swimming)
+                                                           'about me', 'Attending lectures, not doing drugs.', 'profile_images/justas.jpg')
     Justas.university = glasgow
     Justas.availability.add(sat13)
     Justas.availability.add(wed15)
     Justas.save()
 
-    Amy = add_user_profile(am, 'Amy Rose', 'Blah3@blah.co.uk', 'about me',
+    Amy = add_user_profile(am, 'Amy Rose', 'Blah3@blah.co.uk', 'about me', 'Listening to music and dancing.',
                            'profile_images/amy.jpg')
-    Amy.interests.add(going_out)
-    Amy.interests.add(swimming)
+
     Amy.availability.add(wed15)
     Amy.availability.add(thu16)
     Amy.university = glasgow
@@ -125,7 +115,11 @@ def populate():
 
     make_matches()
     # Feedback
-    #forOmar = add_feedback('it was good', '4', Omar, Amy, time, lunch)
+    add_feedback('What a charmer!', Omar, Amy)
+    add_feedback('I think I still owe you 40p...', Omar, Justas)
+    add_feedback('Could have been better. Asshole was late.', Justas, Omar)
+    add_feedback('We both like the same band, untitled artist.', Amy, Justas)
+    add_feedback('We both like the same song, unknown track.', Justas, Amy)
 # Start execution here!
 if __name__ == '__main__':
     print "Starting LunchUp population script..."
