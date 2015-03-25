@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% load staticfiles %}
-{% load image_extras %}
 
 {% block title %} Profile {% endblock %}
 
@@ -29,7 +28,7 @@
                         {% if profile.picture %}
                             <img src="{{ profile.picture.url }}" width="190" class="img-circle">
                         {% else %}
-                            <img src="{% static 'images/ot.jpg' %}" width="190" class="img-circle">
+                            <img src="{% static 'images/profile.jpg' %}" width="190" class="img-circle">
                         {% endif %}
                         {% if myprofile != None %}
                             </a>
@@ -104,10 +103,10 @@
                         {% if feedback %}
                             {% for entry in feedback %}
                             <span href="#" class="list-group-item" style="padding:15px; border:0px;">
-                                {% if entry.author.picture%}
+                                {% if entry.author.picture %}
                                 <img src="{{ entry.author.picture.url }}" width="40" class="img-circle" style="float:left; margin-right:10px;"/>
                                 {% else %}
-                                <img src="../../media/profile_images/leif.jpeg" width="40" class="img-circle" style="float:left; margin-right:10px;"/>
+                                <img src="{% static 'images/profile.jpg' %}" width="40" class="img-circle" style="float:left; margin-right:10px;"/>
                                 {% endif %}
                                 &ldquo;{{ entry.content }}&rdquo;<br/>&mdash;<a
                                 href="/profile/{{ entry.author.user.id }}">{{ entry.author.fullName }}</a></span>

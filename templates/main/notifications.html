@@ -21,7 +21,13 @@
             {% for notif in notifications %}
                 {% if notif.userOne == userprofile %}
                   <div class="col-md-12" style="border: 2px solid; border-radius: 25px; border-color: #dedede; margin-bottom:15px; padding:10px; background-color:#ffffff;">
-                    <div class="col-md-1" style="margin:9px 30px 0 0;"><img src="../../static/images/profile_pics/16_f.jpg" width="90" class="img-circle" /></div>
+                    <div class="col-md-1" style="margin:9px 30px 0 0;">
+                        {% if notif.userTwo.picture %}
+                            <img src="{{ notif.userTwo.picture.url }}" width="90" class="img-circle" />
+                        {% else %}
+                            <img src="{% static 'images/profile.jpg' %}" width="90" class="img-circle" />
+                        {% endif %}
+                    </div>
                     <div class="col-md-9">
                       <span style="font-size:26px; font-weight:bold;" class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;{{ notif.userTwo.fullName }}</span><br />
                       <ul><li>Available:
@@ -38,7 +44,13 @@
                   </div>
                 {% else %}
                   <div class="col-md-12" style="border: 2px solid; border-radius: 25px; border-color: #dedede; margin-bottom:15px; padding:10px; background-color:#ffffff;">
-                    <div class="col-md-1" style="margin:9px 30px 0 0;"><img src="../../static/images/profile_pics/16_f.jpg" width="90" class="img-circle" /></div>
+                    <div class="col-md-1" style="margin:9px 30px 0 0;">
+                        {% if notif.userOne.picture %}
+                            <img src="{{ notif.userOne.picture.url }}" width="90" class="img-circle" />
+                        {% else %}
+                            <img src="{% static 'images/profile.jpg' %}" width="90" class="img-circle" />
+                        {% endif %}
+                    </div>
                     <div class="col-md-9">
                       <span style="font-size:26px; font-weight:bold;" class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;{{ notif.userOne.fullName }}</span><br />
                       <ul><li>Available:
@@ -68,7 +80,19 @@
           {% if matches %}
               {% for match in matches %}
                 <span href="#" class="list-group-item" style="padding:15px;">
-                <img src="../../static/images/profile_pics/10_m.jpg" width="40" class="img-circle" style="float:left; margin-right:10px;" />
+                {% if match.userOne.id == userprofile.id %}
+                    {% if match.userTwo.picture %}
+                        <img src="{{ match.userTwo.picture.url }}" width="90" class="img-circle" />
+                    {% else %}
+                        <img src="{% static 'images/profile.jpg' %}" width="90" class="img-circle" />
+                    {% endif %}
+                {% else %}
+                    {% if match.userOne.picture %}
+                        <img src="{{ match.userOne.picture.url }}" width="90" class="img-circle" />
+                    {% else %}
+                        <img src="{% static 'images/profile.jpg' %}" width="90" class="img-circle" />
+                    {% endif %}
+                {% endif %}
                 {% for timeint in match.available.all %}
                     {{ timeint.time }}:00-{{ timeint.time|add:1 }}:00 on {{ timeint.day }}s&nbsp;&nbsp;
                 {% endfor %}<br />&mdash;

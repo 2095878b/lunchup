@@ -108,7 +108,7 @@ def populate():
     Amy.university = glasgow
     Amy.save()
 
-    make_matches()
+    #make_matches()
     # Feedback
     add_feedback('What a charmer!', Omar, Amy)
     add_feedback('I think I still owe you 40p...', Omar, Justas)
