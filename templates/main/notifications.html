@@ -32,7 +32,7 @@
                       <span style="font-size:26px; font-weight:bold;" class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;<a href="/profile/{{ notif.userTwo.user.id }}">{{ notif.userTwo.fullName }}</a></span></a><br />
                       <ul><li>Available:
                           {% for timeint in notif.available.all %}
-                            {{ timeint.time }}:00-{{ timeint.time|add:1 }}:00 on {{ timeint.day }}s&nbsp;&nbsp;
+                            {{ timeint.time }}:00-{{ timeint.time|add:1 }}:00 on {{ timeint.day }}s&nbsp;
                           {% endfor %}
                       </li><li>Interests: {{ notif.userTwo.interests }}</li></ul>
                     </div>
@@ -54,7 +54,7 @@
                       <span style="font-size:26px; font-weight:bold;" class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;<a href="/profile/{{ notif.userOne.user.id }}">{{ notif.userOne.fullName }}</a></span><br />
                       <ul><li>Available:
                           {% for timeint in notif.available.all %}
-                            {{ timeint.time }}:00-{{ timeint.time|add:1 }}:00 on {{ timeint.day }}s&nbsp;&nbsp;
+                            {{ timeint.time }}:00-{{ timeint.time|add:1 }}:00 on {{ timeint.day }}s&nbsp;
                           {% endfor %}
                       </li><li>Interests: {{ notif.userOne.interests }}</li></ul>
                     </div>

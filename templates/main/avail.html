@@ -109,8 +109,7 @@ $(document).ready(function() {
             $('#avail').append(markup);
         });
     });
-    // TODO: Change to on/delegate so new elements can be removed as well
-    $(".glyphicon-remove-circle").click(function(){
+    $("#avail").on('click', '.glyphicon-remove-circle', function(e){
         var elem = $(this).parent();
         var avail = elem.text().trim();
         var time = avail.split(' ')[0].substring(0, 2);
