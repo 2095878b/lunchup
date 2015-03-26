@@ -23,13 +23,13 @@
                   <div class="col-md-12" style="border: 2px solid; border-radius: 25px; border-color: #dedede; margin-bottom:15px; padding:10px; background-color:#ffffff;">
                     <div class="col-md-1" style="margin:9px 30px 0 0;">
                         {% if notif.userTwo.picture %}
-                            <img src="{{ notif.userTwo.picture.url }}" width="90" class="img-circle" />
+                            <a href="/profile/{{ notif.userTwo.user.id }}"><img src="{{ notif.userTwo.picture.url }}" width="90" class="img-circle" /></a>
                         {% else %}
-                            <img src="{% static 'images/profile.jpg' %}" width="90" class="img-circle" />
+                            <a href="/profile/{{ notif.userTwo.user.id }}"><img src="{% static 'images/profile.jpg' %}" width="90" class="img-circle" /></a>
                         {% endif %}
                     </div>
                     <div class="col-md-9">
-                      <span style="font-size:26px; font-weight:bold;" class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;{{ notif.userTwo.fullName }}</span><br />
+                      <span style="font-size:26px; font-weight:bold;" class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;<a href="/profile/{{ notif.userTwo.user.id }}">{{ notif.userTwo.fullName }}</a></span></a><br />
                       <ul><li>Available:
                           {% for timeint in notif.available.all %}
                             {{ timeint.time }}:00-{{ timeint.time|add:1 }}:00 on {{ timeint.day }}s&nbsp;&nbsp;
@@ -37,7 +37,6 @@
                       </li><li>Interests: {{ notif.userTwo.interests }}</li></ul>
                     </div>
                     <div class="col-md-1" style="margin:9px 30px 0 0;">
-                      <a href="/profile/{{ notif.userTwo.user.id }}"><button type="button" class="btn btn-warning">View <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button></a>
                       <button id="{{ notif.id }}y" type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
                       <button id="{{ notif.id }}n" type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
                     </div>
@@ -46,13 +45,13 @@
                   <div class="col-md-12" style="border: 2px solid; border-radius: 25px; border-color: #dedede; margin-bottom:15px; padding:10px; background-color:#ffffff;">
                     <div class="col-md-1" style="margin:9px 30px 0 0;">
                         {% if notif.userOne.picture %}
-                            <img src="{{ notif.userOne.picture.url }}" width="90" class="img-circle" />
+                            <a href="/profile/{{ notif.userOne.user.id }}"><img src="{{ notif.userOne.picture.url }}" width="90" class="img-circle" /></a>
                         {% else %}
-                            <img src="{% static 'images/profile.jpg' %}" width="90" class="img-circle" />
+                            <a href="/profile/{{ notif.userOne.user.id }}"><img src="{% static 'images/profile.jpg' %}" width="90" class="img-circle" /></a>
                         {% endif %}
                     </div>
                     <div class="col-md-9">
-                      <span style="font-size:26px; font-weight:bold;" class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;{{ notif.userOne.fullName }}</span><br />
+                      <span style="font-size:26px; font-weight:bold;" class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;<a href="/profile/{{ notif.userOne.user.id }}">{{ notif.userOne.fullName }}</a></span><br />
                       <ul><li>Available:
                           {% for timeint in notif.available.all %}
                             {{ timeint.time }}:00-{{ timeint.time|add:1 }}:00 on {{ timeint.day }}s&nbsp;&nbsp;
@@ -60,7 +59,6 @@
                       </li><li>Interests: {{ notif.userOne.interests }}</li></ul>
                     </div>
                     <div class="col-md-1" style="margin:9px 30px 0 0;">
-                      <a href="/profile/{{ notif.userOne.user.id }}"><button type="button" class="btn btn-warning">View <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></button></a>
                       <button id="{{ notif.id }}y" type="button" class="btn btn-success"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button>
                       <button id="{{ notif.id }}n" type="button" class="btn btn-danger"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
                     </div>
