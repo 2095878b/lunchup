@@ -70,6 +70,8 @@ def populate():
     glasgow = add_university(university='Glasgow University')
 
     # Users
+    te = add_user('test', '2096757p@student.gla.ac.uk', 'test')
+    te.save()
     om = add_user('omar', '2098877q@student.gla.ac.uk', 'root')
     om.save()
     ju = add_user('eust', '2095666e@student.gla.ac.uk', 'root')
@@ -83,6 +85,15 @@ def populate():
     zo = add_user('zoes', '2065610s@student.gla.ac.uk', 'root'  )
     zo.save()
     # User profiles
+
+    test = add_user_profile(te, 'Test User', 'test@gmail.co.uk', 'about me', 'testing app and trying to break it', 'profile_images/test.jpg')
+
+    test.university = glasgow
+    test.availability.add(thu16)
+    test.availability.add(fri14)
+    test.availability.add(tue13)
+    test.save()
+
     Omar = add_user_profile(om, 'Omar Tufail', 'omar@gmail.com',
                             'about me', 'Going out, playing foodball, reading.', 'profile_images/omar.jpg')
 
@@ -147,6 +158,7 @@ def populate():
     add_feedback('Had a great lunch, thanks. Hope we can grab luch again.', Zoe, Raj)
     add_feedback('Finally found some who loves games as much as me', Raj, Zoe)
     add_feedback('Will be seeing you again for dinner I hope', Blair, Amy)
+    add_feedback('Was shite since test doesnt even exist',test, Amy)
 
 # Start execution here!
 if __name__ == '__main__':
