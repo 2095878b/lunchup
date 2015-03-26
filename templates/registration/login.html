@@ -40,8 +40,17 @@
         <form class="form-signin" role="form" method="post" action=".">
         {% csrf_token %}
         <h2 class="form-signin-heading">Please sign in</h2>
-        <input class="form-control" placeholder="Username" id="id_username" maxlength="254" name="username" type="text" required autofocus=""/>
-        <input type="password" class="form-control" placeholder="Password" id="id_password" name="password" type="password" required />
+            {% if form.non_field_errors %}
+                <div class="errorlist"><ul>
+                {% for error in form.non_field_errors %}
+                    <li><strong>{{ error|escape }}</strong></li>
+                {% endfor %}
+                </ul></div>
+            {% endif %}
+            {{ form.username.errors }}
+            <input class="form-control" placeholder="Username" id="id_username" maxlength="254" name="username" type="text" required autofocus=""/>
+            {{ form.password.errors }}
+            <input type="password" class="form-control" placeholder="Password" id="id_password" name="password" type="password" required />
             <button class="btn btn-lg btn-warning btn-block" type="submit" value="Submit" />Sign in</button>
         </form>
     </div>
