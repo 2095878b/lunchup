@@ -48,11 +48,7 @@
 <body>
     <div class="container">
         <div class="row">
-            <div class="col-md-6 col-md-offset-3 text-center">
-                <a href="{% url 'splash' %}"><img src="{% static 'images/lunch_up_logo.png' %}" height="230" width="232" /></a>
-                <br /><br />
-            </div>
-        {% block body_block %}{% endblock %}
+            {% block body_block %}{% endblock %}
         </div>
     </div> <!-- //container -->
 </body></html>
