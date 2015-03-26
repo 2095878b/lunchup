@@ -65,7 +65,6 @@ def populate():
     tue13 = add_time(time=13, day='Tuesday')
     thu15 = add_time(time=15, day='Thursday')
 
-
     # Add unis
     glasgow = add_university(university='Glasgow University')
 
@@ -82,7 +81,7 @@ def populate():
     ra.save()
     bl = add_user('bliatch', '2078910A@student.gla.ac.uk', 'root')
     bl.save()
-    zo = add_user('zoes', '2065610s@student.gla.ac.uk', 'root'  )
+    zo = add_user('zoes', '2065610s@student.gla.ac.uk', 'root')
     zo.save()
     # User profiles
 

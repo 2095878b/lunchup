@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# TODO: check foreign key on_delete parameter (low priority, later on)
 
 #class Interest(models.Model):
 #    name = models.CharField(max_length=64)

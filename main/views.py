@@ -5,7 +5,7 @@ from django_ajax.decorators import ajax
 from django.db.models import Q
 from main.models import *
 
-
+# Matchmaking algorithm
 def magic(request):
     data = ""
     try:
@@ -133,9 +133,8 @@ def upload_picture(request):
 
 
 def splash(request):
-    return render(request, 'splash.html')
+    return render(request, 'main/intro.html')
 
-# For now this serves as our splash page
 @login_required
 def how_it_works(request):
     return render(request, 'main/how_it_works.html')

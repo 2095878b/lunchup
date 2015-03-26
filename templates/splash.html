@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <!-- saved from url=(0050)http://www.williamghelfi.com/demos/b3-landing-page -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Lunch Up!</title>
+	<title>Lunch Up! - {% block title %}Intro{% endblock %}</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Bootstrap -->
     {% load static %}
-	<link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-	<link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+	<link href="{% static  'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+	<link href="{% static 'bootstrap/css/font-awesome.css' %}" rel="stylesheet">
 
 	<link href="http://fonts.googleapis.com/css?family=Abel|Open+Sans:400,600" rel="stylesheet">
 
 	<style>
 
-		/* http://css-tricks.com/perfect-full-page-background-image/ */
 		html {
 			background: url({% static 'images/lunchup_faces_bg_org_jpg.jpg' %}) no-repeat center center fixed;
 			-webkit-background-size: cover;
@@ -47,36 +46,13 @@
 
 <style type="text/css"></style></head>
 <body>
-
-	<div class="container">
-		<div class="row">
-
-			<div class="col-md-6 col-md-offset-3 text-center">
-				<img src="{% static 'images/lunch_up_logo.png' %}" />
-				<br /><br />
-			</div>
-
-			<div class="col-md-4 col-md-offset-4 panel text-center">
-
-				<strong><h1>Never lunch alone</h1></strong>
-
-				Easily find people to meet and eat with
-
-					
-						<a href="{% url 'registration_register' %}"><button class="btn btn-success btn-lg">Register</button></a>
-						<br />
-						<a href="{% url 'auth_login' %}">Login</a>
-					
-
-				<!--
-				<div class="margin-base-vertical">
-					<small class="text-muted"><a href="http://www.flickr.com/photos/erwlas/6133364748/">Background picture by erwlas @flickr</a>. Used under <a href="http://creativecommons.org/licenses/by/2.0/deed.en">Creative Commons - Attribution</a>.</small>
-				</div>
-				-->
-
-			</div><!-- //main content -->
-		</div><!-- //row -->
-	</div> <!-- //container -->
-
-
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3 text-center">
+                <a href="{% url 'splash' %}"><img src="{% static 'images/lunch_up_logo.png' %}" height="230" width="232" /></a>
+                <br /><br />
+            </div>
+        {% block body_block %}{% endblock %}
+        </div>
+    </div> <!-- //container -->
 </body></html>

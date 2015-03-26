@@ -1,17 +1,47 @@
-{% extends "base.html" %}
-
+{% extends "splash.html" %}
+{% load static %}
+{% block title %}Login{% endblock %}
 {% block body_block %}
 
-<link href="http://getbootstrap.com/examples/signin/signin.css" rel="stylesheet">
+<style>
+.form-signin {
+  max-width: 330px;
+    padding: 0px 10px 10px;
+    margin: 0 auto;
+}
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: normal;
+}
+.form-signin .form-control {
+  position: relative;
+  height: auto;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+</style>
+<div class="col-md-6 col-md-offset-3 text-center panel">
+    <form class="form-signin" role="form" method="post" action=".">
+    {% csrf_token %}
 
-<form class="form-signin" role="form" method="post" action=".">
-{% csrf_token %}
-
-<h2 class="form-signin-heading">Please sign in</h2>
-<input class="form-control" placeholder="Username" id="id_username" maxlength="254" name="username" type="text" required autofocus=""/>
-<input type="password" class="form-control" placeholder="Password" id="id_password" name="password" type="password" required />
-
+    <h2 class="form-signin-heading">Please sign in</h2>
+    <input class="form-control" placeholder="Username" id="id_username" maxlength="254" name="username" type="text" required autofocus=""/>
+    <input type="password" class="form-control" placeholder="Password" id="id_password" name="password" type="password" required />
         <button class="btn btn-lg btn-warning btn-block" type="submit" value="Submit" />Sign in</button>
-        </form>
+    </form>
+</div>
 
 {% endblock %}
