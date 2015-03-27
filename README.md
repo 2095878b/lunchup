@@ -19,8 +19,8 @@ Additional info:
     <li>We got the database from https://github.com/Hipo/university-domains-list/</li>
 </ul>
 
-Team members:
-Omar Tufail
-Justinas Bikulcius
-Rajeevan Vijayakumar
+Team members:<br>
+Omar Tufail<br>
+Justinas Bikulcius<br>
+Rajeevan Vijayakumar<br>
 Blair William Aitcheson
