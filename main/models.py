@@ -2,10 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-#class Interest(models.Model):
-#    name = models.CharField(max_length=64)
-
 class University(models.Model):
+    name = models.CharField(max_length=64)
     domain = models.CharField(max_length=64)
 
     def __unicode__(self):
@@ -31,15 +29,12 @@ class UserProfile(models.Model):
     university = models.ForeignKey(University, blank=True, null=True)
     about = models.TextField(max_length=6000)
     picture = models.ImageField(upload_to='profile_images', blank=True)
-    # ignores = models.ManyToManyField(UserProfile)
 
 
 class Feedback(models.Model):
     content = models.CharField(max_length=6000)
     recipient = models.ForeignKey(UserProfile, related_name='feedback_recipient')
     author = models.ForeignKey(UserProfile, related_name='feedback_author')
-    # Time when the feedback was left, not the lunch date
-    #time = models.DateTimeField()
 
     class Meta:
         verbose_name_plural = "feedback"

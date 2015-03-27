@@ -3,7 +3,7 @@ import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'lunchup.settings')
 
 import django
-
+import json
 django.setup()
 
 from main.models import *
@@ -28,8 +28,8 @@ def add_feedback(content, recipient, author):
     return f
 
 
-def add_university(university):
-    u = University.objects.get_or_create(domain=university)[0]
+def add_university(name, domain):
+    u = University.objects.get_or_create(name=name, domain=domain)[0]
     return u
 
 
@@ -45,18 +45,23 @@ def add_notification(user1, user2, accepted1, accepted2):
     return n
 
 
-#def add_interest(name):
-#    i = Interest.objects.get_or_create(name=name)[0]
-#    return i
-
-
 def populate():
+
+    # Populate universities
+    f = open("world_universities_and_domains.json")
+    f = f.read()
+    data = json.loads(f)
+    for uni in data:
+        if uni['country'] == 'United Kingdom':
+            add_university(name=uni['name'], domain=uni['domain'])
+
     # Populate time intervals
     days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
     times = [str(i) for i in range(12, 16)]
     for day in days:
         for time in times:
             add_time(time=time, day=day)
+
     # Get some times
     sat13 = add_time(time=13, day='Saturday')
     wed15 = add_time(time=15, day='Wednesday')
@@ -66,7 +71,7 @@ def populate():
     thu15 = add_time(time=15, day='Thursday')
 
     # Add unis
-    glasgow = add_university(university='Glasgow University')
+    glasgow = University.objects.get(domain='gla.ac.uk')
 
     # Users
     te = add_user('test', '2096757p@student.gla.ac.uk', 'test')
