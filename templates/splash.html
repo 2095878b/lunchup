@@ -1,54 +1,59 @@
 <!DOCTYPE html>
 <!-- saved from url=(0050)http://www.williamghelfi.com/demos/b3-landing-page -->
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>Lunch Up! - {% block title %}Intro{% endblock %}</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- Bootstrap -->
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>Lunch Up! - {% block title %}Intro{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
     {% load static %}
-	<link href="{% static  'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-	<link href="{% static 'bootstrap/css/font-awesome.css' %}" rel="stylesheet">
+    <link href="{% static  'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'bootstrap/css/font-awesome.css' %}" rel="stylesheet">
 
-	<link href="http://fonts.googleapis.com/css?family=Abel|Open+Sans:400,600" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Abel|Open+Sans:400,600" rel="stylesheet">
 
-	<style>
+    <style>
 
-		html {
-			background: url({% static 'images/lunchup_faces_bg_org_jpg.jpg' %}) no-repeat center center fixed;
-			-webkit-background-size: cover;
-			-moz-background-size: cover;
-			-o-background-size: cover;
-			background-size: cover;
-		}
+        html {
+            background: url({% static 'images/lunchup_faces_bg_org_jpg.jpg' %}) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
 
-		body {
-			padding-top: 20px;
-			font-size: 16px;
-			font-family: "Open Sans",serif;
-			background: transparent;
-		}
+        body {
+            padding-top: 20px;
+            font-size: 16px;
+            font-family: "Open Sans", serif;
+            background: transparent;
+        }
 
-		h1 {
-			font-family: "Abel", Arial, sans-serif;
-			font-weight: 400;
-			font-size: 40px;
-		}
+        h1 {
+            font-family: "Abel", Arial, sans-serif;
+            font-weight: 400;
+            font-size: 40px;
+        }
 
-		/* Override B3 .panel adding a subtly transparent background */
-		.panel {
-			background-color: rgba(255, 255, 255, 0.9);
-		}
+        /* Override B3 .panel adding a subtly transparent background */
+        .panel {
+            background-color: rgba(255, 255, 255, 0.9);
+        }
 
-		.margin-base-vertical {
-			margin: 40px 0;
-		}
+        .margin-base-vertical {
+            margin: 40px 0;
+        }
 
-	</style>
+    </style>
 
-<style type="text/css"></style></head>
+    <style type="text/css"></style>
+</head>
 <body>
-    <div class="container">
-        <div class="row">
-            {% block body_block %}{% endblock %}
-        </div>
-    </div> <!-- //container -->
-</body></html>
+<div class="container">
+    <div class="row">
+        {% block body_block %}{% endblock %}
+    </div>
+</div>
+<!-- //container -->
+</body>
+</html>

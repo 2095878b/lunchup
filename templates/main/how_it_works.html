@@ -3,58 +3,80 @@
 {% block title %}HIW{% endblock %}
 
 {% block body_block %}
-      <div class="col-xs-12 col-sm-12">
-          <p class="pull-right visible-xs">
+    <div class="col-xs-12 col-sm-12">
+        <p class="pull-right visible-xs">
             <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-          </p>
-          <div class="jumbotron_two">
-            <h1><span class="glyphicon glyphicon-home" aria-hidden="true"></span> <span class="font_styled">How it works</span></h1>
-            <p style="font-size:16px;" class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It's fast and simple to get started with Lunch Up.</p>
-          </div>
-          <div class="row" style="padding:15px;">
-                      <div class="col-md-3 howitworks_col" style="background-color:#ffffff;">
-                        <h2><div class="numberCircle">1</div>&nbsp;&nbsp;&nbsp;<span class="font_styled" style="color:#FF003C; font-weight:bold;">Availablity</span></h2>
-                        <br />
-                        <ul>
-                            <li>List the days and times you are free to meetup for lunch</li><br />
-                            <li>The more you add the more connections are made</li><br />
-                            <li>Lunch up will then match you with others</li><br />
-                        </ul>
-                        <br />
-                      </div>
+        </p>
+        <div class="jumbotron_two">
+            <h1><span class="glyphicon glyphicon-home" aria-hidden="true"></span> <span
+                    class="font_styled">How it works</span></h1>
 
-                      <div class="col-md-3 howitworks_col" style="background-color:#ffffff;">
-                        <h2><div class="numberCircle">2</div>&nbsp;<span class="font_styled" style="color:#FF8A00; font-weight:bold;">Notifications</span></h2>
-                        <br />
-                        <ul>
-                            <li>Once our algorithm matches you up with others, you'll get notifications</li><br />
-                            <li>Check out the profiles of your matches and see what you think</li><br />
-                            <li>If you like what you see, arrange to lunch up! It's that easy.</li><br />
-                        </ul>
-                        <br />
-                      </div>
-
-                      <div class="col-md-3 howitworks_col" style="background-color:#ffffff;">
-                        <h2><div class="numberCircle">3</div>&nbsp;&nbsp;&nbsp;<span class="font_styled" style="color:#FABE28; font-weight:bold;">Lunch Up!</span></h2>
-                        <br />
-                        <ul>
-                            <li>Wait to see if your chosen match also wants to Lunch Up</li><br />
-                            <li>If both of you agree, we'll let you know it's on</li><br />
-                            <li>Arrange to meet your lunch match. Enjoy!</li>
-                        </ul>
-                        <br />
-                      </div>
-          </div>
-
-
-          <div class="row" style="padding:15px;">
-                    <div class="col-md-3 center">
-                      <a href='{% url 'avail' %}'><button class="btn btn-success btn-lg center" type="button" aria-expanded="false">
-                       Let's get started: add your availability<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    </button></a>
-                    <br /><br /><br /><br /><br /><br /><br />
-                        </div>
-
+            <p style="font-size:16px;" class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;It's
+                fast and simple to get started with Lunch Up.</p>
+        </div>
+        <div class="row" style="padding:15px;">
+            <div class="col-md-3 howitworks_col" style="background-color:#ffffff;">
+                <h2>
+                    <div class="numberCircle">1</div>
+                    &nbsp;&nbsp;&nbsp;<span class="font_styled"
+                                            style="color:#FF003C; font-weight:bold;">Availablity</span></h2>
+                <br/>
+                <ul>
+                    <li>List the days and times you are free to meetup for lunch</li>
+                    <br/>
+                    <li>The more you add the more connections are made</li>
+                    <br/>
+                    <li>Lunch up will then match you with others</li>
+                    <br/>
+                </ul>
+                <br/>
             </div>
-      </div>
+
+            <div class="col-md-3 howitworks_col" style="background-color:#ffffff;">
+                <h2>
+                    <div class="numberCircle">2</div>
+                    &nbsp;<span class="font_styled" style="color:#FF8A00; font-weight:bold;">Notifications</span></h2>
+                <br/>
+                <ul>
+                    <li>Once our algorithm matches you up with others, you'll get notifications</li>
+                    <br/>
+                    <li>Check out the profiles of your matches and see what you think</li>
+                    <br/>
+                    <li>If you like what you see, arrange to lunch up! It's that easy.</li>
+                    <br/>
+                </ul>
+                <br/>
+            </div>
+
+            <div class="col-md-3 howitworks_col" style="background-color:#ffffff;">
+                <h2>
+                    <div class="numberCircle">3</div>
+                    &nbsp;&nbsp;&nbsp;<span class="font_styled"
+                                            style="color:#FABE28; font-weight:bold;">Lunch Up!</span></h2>
+                <br/>
+                <ul>
+                    <li>Wait to see if your chosen match also wants to Lunch Up</li>
+                    <br/>
+                    <li>If both of you agree, we'll let you know it's on</li>
+                    <br/>
+                    <li>Arrange to meet your lunch match. Enjoy!</li>
+                </ul>
+                <br/>
+            </div>
+        </div>
+
+
+        <div class="row" style="padding:15px;">
+            <div class="col-md-3 center">
+                <a href='{% url 'avail' %}'>
+                    <button class="btn btn-success btn-lg center" type="button" aria-expanded="false">
+                        Let's get started: add your availability<span class="glyphicon glyphicon-chevron-right"
+                                                                      aria-hidden="true"></span>
+                    </button>
+                </a>
+                <br/><br/><br/><br/><br/><br/><br/>
+            </div>
+
+        </div>
+    </div>
 {% endblock %}

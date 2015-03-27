@@ -7,7 +7,7 @@ class University(models.Model):
     domain = models.CharField(max_length=64)
 
     def __unicode__(self):
-        return u'%s' % (self.name)
+        return u'%s' % self.name
     class Meta:
         verbose_name_plural = "universities"
 
@@ -24,8 +24,6 @@ class UserProfile(models.Model):
 
     interests = models.CharField(max_length=250)
 
-    # TODO: Email to uni domain / custom save
-    # Can be blank/null for now
     university = models.ForeignKey(University, blank=True, null=True)
     about = models.TextField(max_length=6000)
     picture = models.ImageField(upload_to='profile_images', blank=True)

@@ -5,12 +5,12 @@
         <p>{{ error|escape }}</p>
     {% endfor %}
 
-    <br /><br />
+    <br/><br/>
     <form id="picture_form" method="post" action="."
-                enctype="multipart/form-data">
-            {% csrf_token %}
-            <input type="file" name="picture"><br />
-            <input type="submit" name="submit" class="btn btn-success" value="Submit" />
+          enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="file" name="picture"><br/>
+        <input type="submit" name="submit" class="btn btn-success" value="Submit"/>
     </form>
 
 {% endblock %}

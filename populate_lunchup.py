@@ -4,9 +4,11 @@ os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'lunchup.settings')
 
 import django
 import json
+
 django.setup()
 
 from main.models import *
+from main.views import magic
 
 
 def add_user(username, email, password):
@@ -15,6 +17,7 @@ def add_user(username, email, password):
     except:
         u = User.objects.create_user(username, email, password)
     return u
+
 
 def add_user_profile(user, fullname, email, about, interests, picture):
     p = UserProfile.objects.get_or_create(user=user, fullName=fullname,
@@ -46,7 +49,6 @@ def add_notification(user1, user2, accepted1, accepted2):
 
 
 def populate():
-
     # Populate universities
     f = open("world_universities_and_domains.json")
     f = f.read()
@@ -90,7 +92,9 @@ def populate():
     zo.save()
     # User profiles
 
-    test = add_user_profile(te, 'Test User', 'test@gmail.co.uk', 'I like being used to log on and play about with the app.', 'testing app and trying to break it', 'profile_images/test.jpg')
+    test = add_user_profile(te, 'Test User', 'test@gmail.co.uk',
+                            'I like being used to log on and play about with the app.',
+                            'testing app and trying to break it', 'profile_images/test.jpg')
 
     test.university = glasgow
     test.availability.add(thu16)
@@ -99,7 +103,8 @@ def populate():
     test.save()
 
     Omar = add_user_profile(om, 'Omar Tufail', 'omar@gmail.com',
-                            'I love programming but I think its about time I move away from the screen.', 'Going out, playing foodball, reading.', 'profile_images/omar.jpg')
+                            'I love programming but I think its about time I move away from the screen.',
+                            'Going out, playing foodball, reading.', 'profile_images/omar.jpg')
 
     Omar.university = glasgow
     Omar.availability.add(sat13)
@@ -108,7 +113,8 @@ def populate():
     Omar.save()
 
     Justas = add_user_profile(ju, 'Justas Bikulcius', 'eustace@yahoo.com',
-                              'I totally love studying but I think I would rather meet new people', 'Attending lectures, not doing drugs.', 'profile_images/justas.jpg')
+                              'I totally love studying but I think I would rather meet new people',
+                              'Attending lectures, not doing drugs.', 'profile_images/justas.jpg')
 
     Justas.university = glasgow
     Justas.availability.add(sat13)
@@ -116,7 +122,9 @@ def populate():
     Justas.availability.add(tue13)
     Justas.save()
 
-    Amy = add_user_profile(am, 'Amy Rose', 'xamyrosexx@aol.co.uk', 'Im tired of eating alone so would love to meet someone new over lunch ','Listening to music and dancing.',
+    Amy = add_user_profile(am, 'Amy Rose', 'xamyrosexx@aol.co.uk',
+                           'Im tired of eating alone so would love to meet someone new over lunch ',
+                           'Listening to music and dancing.',
                            'profile_images/amy.jpg')
 
     Amy.availability.add(wed15)
@@ -125,8 +133,10 @@ def populate():
     Amy.university = glasgow
     Amy.save()
 
-    Raj = add_user_profile(ra, 'Rajeevan Vijayakumar', 'vj96@live.co.uk', 'I think its time to take a break from the virtual space and meet someone in real life', 'Playing games and reking noobs.',
-                           'profile_images/raj.jpg' )
+    Raj = add_user_profile(ra, 'Rajeevan Vijayakumar', 'vj96@live.co.uk',
+                           'I think its time to take a break from the virtual space and meet someone in real life',
+                           'Playing games and reking noobs.',
+                           'profile_images/raj.jpg')
 
     Raj.university = glasgow
     Raj.availability.add(sat13)
@@ -134,8 +144,9 @@ def populate():
     Raj.availability.add(tue13)
     Raj.save()
 
-    Blair = add_user_profile(bl, 'Blair Aitcheson', 'baitch96@hotmail.co.uk', 'Love surfing the net and love get mad with it', 'Listening to music and chilling',
-                             'profile_images/blair.jpg' )
+    Blair = add_user_profile(bl, 'Blair Aitcheson', 'baitch96@hotmail.co.uk',
+                             'Love surfing the net and love get mad with it', 'Listening to music and chilling',
+                             'profile_images/blair.jpg')
 
     Blair.university = glasgow
     Blair.availability.add(fri14)
@@ -143,8 +154,9 @@ def populate():
     Blair.availability.add(thu15)
     Blair.save()
 
-    Zoe = add_user_profile(zo, 'Zoe Thorn', 'zzthorn@live.co.uk', 'Love going to town and going on shopping sprees', 'Watching Movies and going out',
-                             'profile_images/zoe.jpg' )
+    Zoe = add_user_profile(zo, 'Zoe Thorn', 'zzthorn@live.co.uk', 'Love going to town and going on shopping sprees',
+                           'Watching Movies and going out',
+                           'profile_images/zoe.jpg')
 
     Zoe.university = glasgow
     Zoe.availability.add(fri14)
@@ -162,7 +174,10 @@ def populate():
     add_feedback('Had a great lunch, thanks. Hope we can grab luch again.', Zoe, Raj)
     add_feedback('Finally found some who loves games as much as me', Raj, Zoe)
     add_feedback('Will be seeing you again for dinner I hope', Blair, Amy)
-    add_feedback('Was shite since test doesnt even exist',test, Amy)
+    add_feedback('Was shite since test doesnt even exist', test, Amy)
+
+    # Execute the matchmaking algorithm
+    magic(request=None)
 
 # Start execution here!
 if __name__ == '__main__':

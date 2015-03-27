@@ -4,54 +4,64 @@
 {% block body_block %}
     <style>
         .form-signin {
-          max-width: 330px;
+            max-width: 330px;
             padding: 0px 10px 10px;
             margin: 0 auto;
         }
+
         .form-signin .checkbox {
-          margin-bottom: 10px;
+            margin-bottom: 10px;
         }
+
         .form-signin .checkbox {
-          font-weight: normal;
+            font-weight: normal;
         }
+
         .form-signin .form-control {
-          position: relative;
-          height: auto;
-          -webkit-box-sizing: border-box;
-             -moz-box-sizing: border-box;
-                  box-sizing: border-box;
-          padding: 10px;
-          font-size: 16px;
+            position: relative;
+            height: auto;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+            padding: 10px;
+            font-size: 16px;
         }
+
         .form-signin .form-control:focus {
-          z-index: 2;
+            z-index: 2;
         }
+
         .form-signin input[type="password"] {
-          margin-bottom: 10px;
-          border-top-left-radius: 0;
-          border-top-right-radius: 0;
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
         }
     </style>
     <div class="col-md-6 col-md-offset-3 text-center">
-    <a href="{% url 'splash' %}"><img src="{% static 'images/lunch_up_logo.png' %}" height="230" width="232" /></a>
-    <br /><br />
+        <a href="{% url 'splash' %}"><img src="{% static 'images/lunch_up_logo.png' %}" height="230" width="232"/></a>
+        <br/><br/>
     </div>
     <div class="col-md-6 col-md-offset-3 text-center panel">
         <form class="form-signin" role="form" method="post" action=".">
-        {% csrf_token %}
-        <h2 class="form-signin-heading">Please sign in</h2>
+            {% csrf_token %}
+            <h2 class="form-signin-heading">Please sign in</h2>
             {% if form.non_field_errors %}
-                <div class="errorlist"><ul>
-                {% for error in form.non_field_errors %}
-                    <li><strong>{{ error|escape }}</strong></li>
-                {% endfor %}
-                </ul></div>
+                <div class="errorlist">
+                    <ul>
+                        {% for error in form.non_field_errors %}
+                            <li><strong>{{ error|escape }}</strong></li>
+                        {% endfor %}
+                    </ul>
+                </div>
             {% endif %}
             {{ form.username.errors }}
-            <input class="form-control" placeholder="Username" id="id_username" maxlength="254" name="username" type="text" required autofocus=""/>
+            <input class="form-control" placeholder="Username" id="id_username" maxlength="254" name="username"
+                   type="text" required autofocus=""/>
             {{ form.password.errors }}
-            <input type="password" class="form-control" placeholder="Password" id="id_password" name="password" type="password" required />
-            <button class="btn btn-lg btn-warning btn-block" type="submit" value="Submit" />Sign in</button>
+            <input type="password" class="form-control" placeholder="Password" id="id_password" name="password"
+                   type="password" required/>
+            <button class="btn btn-lg btn-warning btn-block" type="submit" value="Submit"/>
+            Sign in</button>
         </form>
     </div>
 {% endblock %}

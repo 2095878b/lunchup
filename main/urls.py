@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, url, include
 from main import views
+from main import ajax
 
 urlpatterns = patterns('',
     url(r'^$', views.how_it_works, name='how_it_works'),
@@ -10,10 +11,10 @@ urlpatterns = patterns('',
     url(r'^availability/$', views.avail, name='avail'),
     url(r'^notifications/$', views.notifications, name='notifications'),
     url(r'^upload_picture/$', views.upload_picture, name='upload_picture'),
-    url(r'^edit_profile/$', views.edit_profile, name='edit_profile'),
-    url(r'^get_avail/$', views.get_avail, name='get_avail'),
-    url(r'^add_avail/$', views.add_avail, name='add_avail'),
-    url(r'^rm_avail/$', views.rm_avail, name='rm_avail'),
-    url(r'^accept_or_decline/$', views.accept_or_decline, name='accept_or_decline'),
+    url(r'^edit_profile/$', ajax.edit_profile, name='edit_profile'),
+    url(r'^get_avail/$', ajax.get_avail, name='get_avail'),
+    url(r'^add_avail/$', ajax.add_avail, name='add_avail'),
+    url(r'^rm_avail/$', ajax.rm_avail, name='rm_avail'),
+    url(r'^accept_or_decline/$', ajax.accept_or_decline, name='accept_or_decline'),
     url(r'^magic/$', views.magic, name='magic'),
 )

@@ -14,7 +14,8 @@
                 <h1><span class="glyphicon glyphicon-user" aria-hidden="true"></span> <span
                         class="font_styled">Profile</span></h1>
 
-                <p style="font-size:16px;" class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Let people see what your interests are and when you're available!</p>
+                <p style="font-size:16px;" class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Let
+                    people see what your interests are and when you're available!</p>
             </div>
             <div class="row" style="padding:15px;">
 
@@ -37,13 +38,13 @@
                         <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>&nbsp;&nbsp;<span
                             style="font-size:20px;" class="font_styled">
                         {% if myprofile != None %}
-                        <a href="#" id="publicEmail" data-type="text"
-                                                                           data-pk="{{ profile.id }}"
-                                                                           data-url="/edit_profile/"
-                                                                           data-title="Enter your public email">{{ profile.publicEmail }}</a></span>
-                    {% else %}
-                        <a href="mailto:{{ profile.publicEmail }}">Email me!</a>
-                    {% endif %}
+                            <a href="#" id="publicEmail" data-type="text"
+                               data-pk="{{ profile.id }}"
+                               data-url="/edit_profile/"
+                               data-title="Enter your public email">{{ profile.publicEmail }}</a></span>
+                        {% else %}
+                            <a href="mailto:{{ profile.publicEmail }}">Email me!</a>
+                        {% endif %}
                     </div>
 
                     <div class="col-md-8">
@@ -89,13 +90,13 @@
                                                                                                class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;Interests</span>
                         <br/><br/>
                         <ul>
-                                {% if myprofile != None %}
-                                    <a href="#" id="interests" data-type="textarea" data-pk="{{ profile.id }}"
-                                       data-url="/edit_profile/"
-                                       data-title="List your interests">{{ profile.interests }}</a>
-                                {% else %}
-                                    {{ profile.interests }}
-                                {% endif %}
+                            {% if myprofile != None %}
+                                <a href="#" id="interests" data-type="textarea" data-pk="{{ profile.id }}"
+                                   data-url="/edit_profile/"
+                                   data-title="List your interests">{{ profile.interests }}</a>
+                            {% else %}
+                                {{ profile.interests }}
+                            {% endif %}
                         </ul>
                         <hr/>
 
@@ -104,15 +105,17 @@
                         <br/><br/>
                         {% if feedback %}
                             {% for entry in feedback %}
-                            <span href="#" class="list-group-item" style="padding:15px; border:0px;">
+                                <span href="#" class="list-group-item" style="padding:15px; border:0px;">
                                 {% if entry.author.picture %}
-                                <img src="{{ entry.author.picture.url }}" width="40" class="img-circle" style="float:left; margin-right:10px;"/>
+                                    <img src="{{ entry.author.picture.url }}" width="40" class="img-circle"
+                                         style="float:left; margin-right:10px;"/>
                                 {% else %}
-                                <img src="{% static 'images/profile.jpg' %}" width="40" class="img-circle" style="float:left; margin-right:10px;"/>
+                                    <img src="{% static 'images/profile.jpg' %}" width="40" class="img-circle"
+                                         style="float:left; margin-right:10px;"/>
                                 {% endif %}
-                                &ldquo;{{ entry.content }}&rdquo;<br/>&mdash;<a
-                                href="/profile/{{ entry.author.user.id }}">{{ entry.author.fullName }}</a></span>
-                            <hr/>
+                                    &ldquo;{{ entry.content }}&rdquo;<br/>&mdash;<a
+                                        href="/profile/{{ entry.author.user.id }}">{{ entry.author.fullName }}</a></span>
+                                <hr/>
                             {% endfor %}
                         {% else %}
                             <h3>No feedback yet.</h3>
@@ -129,7 +132,8 @@
                                 {% csrf_token %}
                                 <input type="hidden" name="recipient" value="{{ profile.id }}">
                                 <textarea name="content" class="form-control" rows="3" required></textarea><br/>
-                                <button type="submit" value="Submit" class="btn btn-success">Post</button><br/><br/>
+                                <button type="submit" value="Submit" class="btn btn-success">Post</button>
+                                <br/><br/>
                             </form>
 
                         {% endif %}

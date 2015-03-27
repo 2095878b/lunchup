@@ -27,6 +27,3 @@ class TimeIntervalTests(TestCase):
         new_day = TimeInterval(time=14, day="Monday")
         self.assertIn(new_day.day,days,True)
 
-
-class
-# Create your tests here.
