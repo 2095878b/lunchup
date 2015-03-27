@@ -76,9 +76,11 @@
                                                                                                class="font_styled">&nbsp;&nbsp;&nbsp;&nbsp;Available</span>
                         <br/><br/>
                         <ul>
-                            <li>13:00 - 14:00, Wednesdays</li>
-                            <li>14:00 - 15:00, Wednesdays</li>
-                            <li>12:00 - 13:00, Fridays</li>
+                            {% if profile.availability %}
+                                {% for timeint in profile.availability.all %}
+                                    <li>{{ timeint.time }}:00 - {{ timeint.time|add:1 }}:00 on {{ timeint.day }}s</li>
+                                {% endfor %}
+                            {% endif %}
                         </ul>
                         <hr/>
 
