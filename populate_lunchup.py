@@ -90,7 +90,7 @@ def populate():
     zo.save()
     # User profiles
 
-    test = add_user_profile(te, 'Test User', 'test@gmail.co.uk', 'about me', 'testing app and trying to break it', 'profile_images/test.jpg')
+    test = add_user_profile(te, 'Test User', 'test@gmail.co.uk', 'I like being used to log on and play about with the app.', 'testing app and trying to break it', 'profile_images/test.jpg')
 
     test.university = glasgow
     test.availability.add(thu16)
@@ -99,7 +99,7 @@ def populate():
     test.save()
 
     Omar = add_user_profile(om, 'Omar Tufail', 'omar@gmail.com',
-                            'about me', 'Going out, playing foodball, reading.', 'profile_images/omar.jpg')
+                            'I love programming but I think its about time I move away from the screen.', 'Going out, playing foodball, reading.', 'profile_images/omar.jpg')
 
     Omar.university = glasgow
     Omar.availability.add(sat13)
@@ -108,7 +108,7 @@ def populate():
     Omar.save()
 
     Justas = add_user_profile(ju, 'Justas Bikulcius', 'eustace@yahoo.com',
-                              'about me', 'Attending lectures, not doing drugs.', 'profile_images/justas.jpg')
+                              'I totally love studying but I think I would rather meet new people', 'Attending lectures, not doing drugs.', 'profile_images/justas.jpg')
 
     Justas.university = glasgow
     Justas.availability.add(sat13)
@@ -116,7 +116,7 @@ def populate():
     Justas.availability.add(tue13)
     Justas.save()
 
-    Amy = add_user_profile(am, 'Amy Rose', 'xamyrosexx@aol.co.uk', 'about me', 'Listening to music and dancing.',
+    Amy = add_user_profile(am, 'Amy Rose', 'xamyrosexx@aol.co.uk', 'Im tired of eating alone so would love to meet someone new over lunch ','Listening to music and dancing.',
                            'profile_images/amy.jpg')
 
     Amy.availability.add(wed15)
@@ -125,7 +125,7 @@ def populate():
     Amy.university = glasgow
     Amy.save()
 
-    Raj = add_user_profile(ra, 'Rajeevan Vijayakumar', 'vj96@live.co.uk', 'about me', 'Playing games and reking noobs.',
+    Raj = add_user_profile(ra, 'Rajeevan Vijayakumar', 'vj96@live.co.uk', 'I think its time to take a break from the virtual space and meet someone in real life', 'Playing games and reking noobs.',
                            'profile_images/raj.jpg' )
 
     Raj.university = glasgow
@@ -134,7 +134,7 @@ def populate():
     Raj.availability.add(tue13)
     Raj.save()
 
-    Blair = add_user_profile(bl, 'Blair Aitcheson', 'baitch96@hotmail.co.uk', 'about me', 'Listening to music and chilling',
+    Blair = add_user_profile(bl, 'Blair Aitcheson', 'baitch96@hotmail.co.uk', 'Love surfing the net and love get mad with it', 'Listening to music and chilling',
                              'profile_images/blair.jpg' )
 
     Blair.university = glasgow
@@ -143,7 +143,7 @@ def populate():
     Blair.availability.add(thu15)
     Blair.save()
 
-    Zoe = add_user_profile(zo, 'Zoe Thorn', 'zzthorn@live.co.uk', 'about me', 'Watching Movies and going out',
+    Zoe = add_user_profile(zo, 'Zoe Thorn', 'zzthorn@live.co.uk', 'Love going to town and going on shopping sprees', 'Watching Movies and going out',
                              'profile_images/zoe.jpg' )
 
     Zoe.university = glasgow
