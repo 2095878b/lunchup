@@ -29,9 +29,7 @@ class UserProfile(models.Model):
     picture = models.ImageField(upload_to='profile_images', blank=True)
 
     def save(self, *args, **kwargs):
-
         domain = self.user.email.split('@')[1]
-        found = False
         for uni in University.objects.all():
             if uni.domain in domain:
                 self.university = uni

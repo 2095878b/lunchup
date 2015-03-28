@@ -17,11 +17,12 @@ class UserProfileTests(TestCase):
 
     def test_check_email_is_parsed_and_uni_is_set(self):
 
-        sam = User.objects.create_user('sammy6', '2095871k@staff.gla.ac.uk', 'nyannyan')
+        uni = University.objects.get_or_create(name="Glasgow", domain="gla.ac.uk")[0]
+
+        sam = User.objects.create_user(username='sammy6', email='2095871k@staff.gla.ac.uk', password='nyannyan')
         prof = UserProfile(user=sam, fullName = 'Samantha Jones', publicEmail="lalasam@gmail.com",
                             interests = 'Sleeping', about="Nothing much")
         prof.save()
-        uni = University.objects.get_or_create(name="Glasgow", domain="gla.ac.uk")
         self.assertEqual((prof.university == uni), True)
 
 class TimeIntervalTests(TestCase):
