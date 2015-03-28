@@ -28,6 +28,15 @@ class UserProfile(models.Model):
     about = models.TextField(max_length=6000)
     picture = models.ImageField(upload_to='profile_images', blank=True)
 
+    def save(self, *args, **kwargs):
+
+        domain = self.user.email.split('@')[1]
+        found = False
+        for uni in University.objects.all():
+            if uni.domain in domain:
+                self.university = uni
+                break
+        super(UserProfile, self).save(*args, **kwargs)
 
 class Feedback(models.Model):
     content = models.CharField(max_length=6000)

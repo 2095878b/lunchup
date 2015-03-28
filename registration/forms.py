@@ -69,7 +69,6 @@ class RegistrationForm(forms.Form):
             found = False
             for uni in University.objects.all():
                 if uni.domain in domain:
-                    self.cleaned_data['university'] = uni
                     found = True
                     break
             if found == False:
